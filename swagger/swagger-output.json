@@ -5,7 +5,7 @@
     "description": "營養日記文件",
     "version": "1.0.0"
   },
-  "host": "nutrientbank-app-backend.onrender.com",
+  "host": "nutrientbank-backend-app.onrender.com",
   "basePath": "",
   "schemes": [
     "http",
