@@ -68,7 +68,7 @@ router
   .patch('/user/profile', isAuth,
     /*
       #swagger.tags = ['User - 會員']
-      #swagger.description = '更新會員資料 API'
+      #swagger.description = '編輯會員資料 API'
       #swagger.security = [{'api_key': ['apiKeyAuth']}]
       #swagger.parameters['body'] = {
         in: 'body',
@@ -92,7 +92,7 @@ router
 router.post('/user/updatePassword', isAuth,
   /*
     #swagger.tags = ['User - 會員']
-    #swagger.description = '更新密碼 API'
+    #swagger.description = '編輯密碼 API'
     #swagger.security = [{'api_key': ['apiKeyAuth']}]
     #swagger.parameters['body'] = {
       in: 'body',
@@ -105,46 +105,14 @@ router.post('/user/updatePassword', isAuth,
       }
     }
     #swagger.responses[200] = { 
-      description: '更新密碼資訊',
+      description: '編輯密碼資訊',
       schema: { 
         status: true,
-        message: '更新密碼成功'
+        message: '編輯密碼成功'
       }
     }
   */
   userController.updatePassword
 );
-
-router
-  .post('/user/like/:foodId', isAuth,
-    /*
-      #swagger.tags = ['User - 會員']
-      #swagger.description = '新增食品書籤 API'
-      #swagger.security = [{'api_key': ['apiKeyAuth']}]
-      #swagger.responses[200] = { 
-        description: '食品書籤資訊',
-        schema: { 
-          status: true,
-          message: '新增食品書籤成功'
-        }
-      }
-    */
-    userController.addFoodLike
-  )
-  .post('/user/unlike/:foodId', isAuth,
-    /*
-      #swagger.tags = ['User - 會員']
-      #swagger.description = '新增食品書籤 API'
-      #swagger.security = [{'api_key': ['apiKeyAuth']}]
-      #swagger.responses[200] = { 
-        description: '食品書籤資訊',
-        schema: { 
-          status: true,
-          message: '新增食品書籤成功'
-        }
-      }
-    */
-    userController.cancelFoodLike
-  );
 
 module.exports = router;

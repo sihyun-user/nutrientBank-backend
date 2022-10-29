@@ -5,7 +5,7 @@ const doc = {
     title: '營養日記 API', // 文件名稱
     description: '營養日記文件' // 文件描述
   },
-  host: 'nutrientbank-backend-app.onrender.com', // (重要) 本地:localhost:3005 | render:https://nutrientbank-app-backend.onrender.com
+  host: 'localhost:3005', // (重要) 本地:localhost:3005 | render:nutrientbank-app-backend.onrender.com
 	basePath: '', // 預設為'/'
   schemes: ['http', 'https'], // swagger文件支援哪幾種模式
 	securityDefinitions: { // 驗證 token
@@ -43,7 +43,7 @@ const doc = {
     },
     updateProfile: {
       status: true,
-      message: '更新會員資料成功',
+      message: '編輯會員資料成功',
       data: {
         name: '會員名稱',
         email: '會員E-mail',

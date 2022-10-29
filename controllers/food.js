@@ -1,9 +1,10 @@
-const Food = require('../models/foodModel');
+const Food = require('../models/food');
+const User = require('../models/user');
 const appSuccess = require('../service/appSuccess');
 const appError = require('../service/appError');
 const catchAsync = require('../service/catchAsync');
 const apiState = require('../service/apiState');
-const validator = require('validator');
+const appHelper = require('../service/appHelper');
 
 // 取得食品列表 API
 exports.getAllFood = catchAsync(async (req, res, next) => {
@@ -35,58 +36,76 @@ exports.getOneFood = catchAsync(async (req, res, next) => {
 });
 
 // 新增一筆食品 API
-// TODO: 缺少檢查每個成分的單位值是否正確
-// TODO: 判斷食品重含量是否需要填寫單位克
 exports.createOneFood = catchAsync(async (req, res, next) => {
-  let { name, subName, brand, perUnitWeight, nutrition } = req.body;
-  let ingredientType = ['糖','碳水化合物', '反式脂肪', '熱量', '脂肪', '蛋白質', '鈉', '飽和脂肪'];
-  let unitType = ['g', 'mg', 'ml', 'kcal'];
-  // 資料欄位正確
-  if (!name) {
-    return appError({statusCode: 400, message:'食品名稱為必填欄位'}, next);
-  };
-  // 食品名稱不為空白
-  if (validator.isEmpty(name.trim())) {
-    return appError({statusCode: 400, message:'食品名稱不為空白'}, next);
-  };
-  // 食品名稱2個字元以上
-  if (!validator.isLength(name.trim(), {min:2})) {
-    return appError({statusCode: 400, message:'食品名稱低於2個字元'}, next);
-  };
-  // 食品英文名稱2個字元以上(選填)
-  if (subName && !validator.isLength(subName.trim(), {min:2})) {
-    return appError({statusCode: 400, message:'食品英文名稱低於2個字元'}, next);
-  };
-  // 食品品牌名稱2個字元以上(選填)
-  if (brand && !validator.isLength(brand.trim(), {min:2})) {
-    return appError({statusCode: 400, message:'食品品牌名稱低於2個字元'}, next);
-  };
-  // 食品重含量2個字元以上且包含單位(選填)
-  if (perUnitWeight && (!validator.isLength(perUnitWeight.trim(), {min:2}) || !perUnitWeight.includes('克'))) {
-    return appError({statusCode: 400, message:'食品重含量未填寫正確(2個字元以上且包含單位(克))'}, next);
-  };
-  // 食品營養成分欄位正確
-  if (nutrition.length !== 8) {
-    return appError({statusCode: 400, message:`食品營養成分未填寫正確(${ingredientType})`}, next);
-  } else {
-    nutrition.find((nut) => {
-      if (!ingredientType.includes(nut.ingredient)) {
-        return appError({statusCode: 400, message:`食品營養成分名稱未填寫正確(${ingredientType})`}, next);
-      };
-      if (!unitType.some(type => nut.unit == type)) {
-        return appError({statusCode: 400, message:`食品營養成分單位未填寫正確(${unitType})`}, next);
-      };
-      let newCount = nut.perUnitContent.trim();
-      if (newCount < 0) {
-        return appError({statusCode: 400, message:'食品營養成分重含量未填寫正確'}, next);
-      };
-    });
-  };
+  const { name, subName, brand, perUnitWeight, nutrition } = req.body;
+  const paramData = { name, subName, brand, perUnitWeight, nutrition };
 
-  const data = await Food.create({ name, subName, brand, perUnitWeight, nutrition });
+  appHelper.verifyFood(paramData, next);
+
+  let data = await Food.create(paramData);
+  data = { newFoodId: data._id };
+
   appSuccess({ res, data, message: '新增一筆食品成功' });
 });
 
-//TODO: 編輯一筆食品 API
+// 編輯一筆食品 API
+exports.updateOneFood = catchAsync(async (req, res, next) => {
+  let { name, subName, brand, perUnitWeight, nutrition } = req.body;
+  const paramData = { name, subName, brand, perUnitWeight, nutrition };
+  const foodId = req.params.foodId;
+
+  appHelper.verifyFood(paramData, next);
+
+  await Food.findByIdAndUpdate(foodId, paramData, {new: true, runValidators: true}).exec();
+  appSuccess({ res, message: '編輯一筆食品成功' });
+});
 
 //TODO: 刪除一筆食品 API
+exports.deleteOneFood = catchAsync(async (req, res, next) => {
+
+});
+
+// 新增食品書籤 API
+exports.addFoodLike = catchAsync(async (req, res, next) => {
+  const userId = req.userId;
+  const foodId = req.params.foodId;
+
+  const data = await Food.findById(foodId).exec();
+  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
+  
+  await User.updateOne(
+    { 
+      '_id': userId,
+      'likes': { $ne: foodId }
+    },
+    { $addToSet: { likes: foodId } }
+  );
+
+  appSuccess({ res, message: '新增食品書籤成功' });
+});
+
+// 取消食品書籤 API
+exports.cancelFoodLike = catchAsync(async (req, res, next) => {
+  const userId = req.userId;
+  const foodId = req.params.foodId;
+
+  const data = await Food.findById(foodId).exec();
+  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
+
+  await User.updateOne(
+    { '_id': userId },
+    { $pull: { likes: foodId } }
+  );
+
+  appSuccess({ res, message: '取消食品書籤成功' });
+});
+
+//TODO: 取得自訂食品列表 API
+//TODO: 新增自訂食品 API
+//TODO: 編輯自訂食品 API
+//TODO: 刪除自訂食品 API
+
+
+//TODO: 新增一則食品日記 API
+//TODO: 編輯一則食品日記 API
+//TODO: 刪除一則食品日記 API

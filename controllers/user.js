@@ -1,5 +1,4 @@
-const User = require('../models/userModel');
-const Food = require('../models/foodModel');
+const User = require('../models/user');
 const appSuccess = require('../service/appSuccess');
 const appError = require('../service/appError');
 const catchAsync = require('../service/catchAsync');
@@ -101,7 +100,7 @@ exports.getProfile = catchAsync(async(req, res, next) => {
   appSuccess({ res, data, message: '取得會員資料成功' });
 });
 
-// 更新會員資料 API
+// 編輯會員資料 API
 exports.updateProfile = catchAsync(async(req, res, next) => {
   const { name, sex, photo } = req.body;
   const userId = req.userId;
@@ -126,10 +125,10 @@ exports.updateProfile = catchAsync(async(req, res, next) => {
     name, sex, photo
   },{new: true, runValidators: true}).select('-_id').exec();
 
-  appSuccess({ res, data, message: '更新會員資料成功' });
+  appSuccess({ res, data, message: '編輯會員資料成功' });
 });
 
-// 更新密碼 API
+// 編輯密碼 API
 exports.updatePassword = catchAsync(async(req, res, next) => {
   let { password,  confirmPassword } = req.body;
   const userId = req.userId;
@@ -149,45 +148,5 @@ exports.updatePassword = catchAsync(async(req, res, next) => {
   password = await bcrypt.hash(password, 12);
   await User.findByIdAndUpdate(userId, {password}).exec();
 
-  appSuccess({ res, message: '更新密碼成功' });
+  appSuccess({ res, message: '編輯密碼成功' });
 });
-
-// 新增食品書籤 API
-exports.addFoodLike = catchAsync(async (req, res, next) => {
-  const userId = req.userId;
-  const foodId = req.params.foodId;
-
-  const data = await Food.findById(foodId).exec();
-  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
-  
-  await User.updateOne(
-    { 
-      '_id': userId,
-      'likes': { $ne: foodId }
-    },
-    { $addToSet: { likes: foodId } }
-  );
-
-  appSuccess({ res, message: '新增食品書籤成功' });
-});
-
-// 取消食品書籤 API
-exports.cancelFoodLike = catchAsync(async (req, res, next) => {
-  const userId = req.userId;
-  const foodId = req.params.foodId;
-
-  const data = await Food.findById(foodId).exec();
-  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
-
-  await User.updateOne(
-    { '_id': userId },
-    { $pull: { likes: foodId } }
-  );
-
-  appSuccess({ res, message: '取消食品書籤成功' });
-});
-
-//TODO: 取得自訂食品列表 API
-//TODO: 新增自訂食品 API
-//TODO: 編輯自訂食品 API
-//TODO: 刪除自訂食品 API
