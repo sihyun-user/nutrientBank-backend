@@ -40,7 +40,6 @@ exports.generateSendJWT = (user, res) => {
 // TODO: 缺少檢查每個成分的單位值是否正確(是否需要填寫單位)
 // TODO: 判斷食品重含量是否需要填寫單位克
 exports.verifyFood = (data, next) => {
-  console.log(data)
   let { name, subName, brand, perUnitWeight, nutrition } = data;
   let ingredientType = ['糖','碳水化合物', '反式脂肪', '熱量', '脂肪', '蛋白質', '鈉', '飽和脂肪'];
   let unitType = ['g', 'mg', 'ml', 'kcal'];

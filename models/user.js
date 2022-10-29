@@ -33,15 +33,15 @@ const userSchema = new mongoose.Schema(
     likes: [
       { type: mongoose.Schema.ObjectId, ref: 'Food' }
     ],
+    isAdmin: {
+      type: Boolean,
+      default: false
+    },
     createdAt: {
       type: Date,
       default: Date.now,
       select: false
     },
-    isAdmin: {
-      type: Boolean,
-      default: false
-    }
   },
   {
     versionKey: false

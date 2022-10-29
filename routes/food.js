@@ -130,7 +130,7 @@ router
   );
 
 router
-  .post('/food/like/:foodId', isAuth,
+  .post('/food/:foodId/like', isAuth,
     /*
       #swagger.tags = ['Food - 食品']
       #swagger.description = '新增食品書籤 API'
@@ -145,7 +145,7 @@ router
     */
       foodController.addFoodLike
   )
-  .post('/food/unlike/:foodId', isAuth,
+  .post('/food/:foodId/unlike', isAuth,
     /*
       #swagger.tags = ['Food - 食品']
       #swagger.description = '取消食品書籤 API'
@@ -162,17 +162,17 @@ router
   );
 
 router
-  .get('/food/customFood', isAuth,
+  .get('/customFoods', isAuth,
     foodController.getAllCustomFood
   )
-  .post('/food/customFood/:foodId', isAuth,
+  .post('/customFood', isAuth,
     foodController.createCustomFood
   )
-  .patch('/food/customFood/:foodId', isAuth,
-    foodController.createCustomFood
+  .patch('/customFood/:customFoodId', isAuth,
+    foodController.updateCustomFood
   )
-  .delete('/food/customFood/:foodId', isAuth,
-    foodController.createCustomFood
+  .delete('/customFood/:customFoodId', isAuth,
+    foodController.deleteCustomFood
   );
   
 

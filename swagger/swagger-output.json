@@ -380,7 +380,10 @@
         ]
       },
       "delete": {
-        "description": "",
+        "tags": [
+          "Food - 食品"
+        ],
+        "description": "刪除一筆食品 API",
         "parameters": [
           {
             "name": "foodId",
@@ -389,7 +392,34 @@
             "type": "string"
           }
         ],
-        "responses": {}
+        "responses": {
+          "200": {
+            "description": "食品書籤資訊",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "刪除一筆食品成功"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
       }
     },
     "/api/food": {
@@ -491,7 +521,7 @@
         ]
       }
     },
-    "/api/food/like/{foodId}": {
+    "/api/food/{foodId}/like": {
       "post": {
         "tags": [
           "Food - 食品"
@@ -535,7 +565,7 @@
         ]
       }
     },
-    "/api/food/unlike/{foodId}": {
+    "/api/food/{foodId}/unlike": {
       "post": {
         "tags": [
           "Food - 食品"
@@ -577,6 +607,46 @@
             ]
           }
         ]
+      }
+    },
+    "/api/customFoods": {
+      "get": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/customFood": {
+      "post": {
+        "description": "",
+        "parameters": [],
+        "responses": {}
+      }
+    },
+    "/api/customFood/{customFoodId}": {
+      "patch": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "customFoodId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "delete": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "customFoodId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
       }
     }
   },
