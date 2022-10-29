@@ -60,9 +60,14 @@ exports.updateOneFood = catchAsync(async (req, res, next) => {
   appSuccess({ res, message: '編輯一筆食品成功' });
 });
 
-//TODO: 刪除一筆食品 API
+// 刪除一筆食品 API
 exports.deleteOneFood = catchAsync(async (req, res, next) => {
+  const foodId = req.params.foodId;
 
+  const data = await Food.findByIdAndDelete(foodId).exec();
+  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
+
+  appSuccess({ res, message: '刪除一筆食品成功' });
 });
 
 // 新增食品書籤 API
@@ -101,10 +106,18 @@ exports.cancelFoodLike = catchAsync(async (req, res, next) => {
 });
 
 //TODO: 取得自訂食品列表 API
+exports.getAllCustomFood = catchAsync(async (req, res, next) => {
+});
 //TODO: 新增自訂食品 API
+exports.createCustomFood = catchAsync(async (req, res, next) => {
+});
 //TODO: 編輯自訂食品 API
+exports.updateCustomFood = catchAsync(async (req, res, next) => {
+});
 //TODO: 刪除自訂食品 API
+exports.deleteCustomFood = catchAsync(async (req, res, next) => {
 
+});
 
 //TODO: 新增一則食品日記 API
 //TODO: 編輯一則食品日記 API

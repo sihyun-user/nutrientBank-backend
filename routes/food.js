@@ -114,6 +114,18 @@ router
     foodController.updateOneFood
   )
   .delete('/food/:foodId',
+  /*
+      #swagger.tags = ['Food - 食品']
+      #swagger.description = '刪除一筆食品 API'
+      #swagger.security = [{'api_key': ['apiKeyAuth']}]
+      #swagger.responses[200] = { 
+        description: '食品書籤資訊',
+        schema: { 
+          status: true,
+          message: '刪除一筆食品成功'
+        }
+      }
+    */
     foodController.deleteOneFood
   );
 
@@ -147,6 +159,20 @@ router
       }
     */
     foodController.cancelFoodLike
+  );
+
+router
+  .get('/food/customFood', isAuth,
+    foodController.getAllCustomFood
+  )
+  .post('/food/customFood/:foodId', isAuth,
+    foodController.createCustomFood
+  )
+  .patch('/food/customFood/:foodId', isAuth,
+    foodController.createCustomFood
+  )
+  .delete('/food/customFood/:foodId', isAuth,
+    foodController.createCustomFood
   );
   
 
