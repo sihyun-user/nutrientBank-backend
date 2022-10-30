@@ -53,7 +53,7 @@ router
         required: true,
         description: '資料格式',
         schema: { 
-          $content: '食品名稱',
+          $name: '食品名稱',
           subName: '食品英文名稱',
           brand: '食品品牌',
           $perUnitWeight: '食品重含量',
@@ -90,7 +90,7 @@ router
         required: true,
         description: '資料格式',
         schema: { 
-          $content: '食品名稱',
+          $name: '食品名稱',
           subName: '食品英文名稱',
           brand: '食品品牌',
           $perUnitWeight: '食品重含量',
@@ -160,20 +160,5 @@ router
     */
     foodController.cancelFoodLike
   );
-
-router
-  .get('/customFoods', isAuth,
-    foodController.getAllCustomFood
-  )
-  .post('/customFood', isAuth,
-    foodController.createCustomFood
-  )
-  .patch('/customFood/:customFoodId', isAuth,
-    foodController.updateCustomFood
-  )
-  .delete('/customFood/:customFoodId', isAuth,
-    foodController.deleteCustomFood
-  );
-  
 
 module.exports = router;

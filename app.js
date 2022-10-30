@@ -16,6 +16,8 @@ const appError = require('./service/appError');
 // router
 const userRouter = require('./routes/user');
 const foodRouter = require('./routes/food');
+const diaryRouter = require('./routes/diary');
+const customFoodRouter = require('./routes/customFood');
 
 const app = express();
 
@@ -29,6 +31,8 @@ app.use(cookieParser());
 
 app.use('/api', userRouter);
 app.use('/api', foodRouter);
+app.use('/api', customFoodRouter);
+app.use('/api', diaryRouter);
 app.use('/api-doc', swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 // 404

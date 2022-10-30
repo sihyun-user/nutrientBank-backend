@@ -86,7 +86,25 @@ const doc = {
           }
         ]
       }]
-    }
+    },
+    getAllCustomFood: {
+      status: true,
+      message: '取得自訂食品列表成功',
+      data: [{
+        _id: '自訂食品Id',
+        name: '食品名稱',
+        subName: '食品英文名稱',
+        brand: '食品品牌',
+        perUnitWeight: '食品重含量',
+        nutrition:[
+          {
+            ingredient: "食品營養成分",
+            unit: "食品營養成分單位",
+            perUnitContent:" 每單位重含量"
+          }
+        ]
+      }]
+    },
 	}
 };
 
