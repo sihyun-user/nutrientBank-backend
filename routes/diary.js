@@ -4,21 +4,32 @@ const diaryController = require('../controllers/diary');
 const { isAuth } = require('../service/appHelper');
 
 router
-  .get('/diarys', isAuth,
+  .get('/diarys/:year/:month', isAuth,
     /*
       #swagger.tags= ['Diary - 營養日記']
-      #swagger.description = '取得今月營養日記 API'
+      #swagger.description = '取得月份營養日記列表 API'
+      #swagger.parameters['year'] = {
+        in: 'query',
+        type: 'String',
+        description: '年份'
+      }
+      #swagger.parameters['month'] = {
+        in: 'query',
+        type: 'String',
+        description: '月份'
+      }
       #swagger.responses[200] = { 
         description: '營養資訊',
         schema: { 
           status: true,
-          message: '取得今月營養日記成功',
+          message: '取得今月營養日記列表成功',
+          schema: { $ref: '#/definitions/getMonthdiarys' }
         }
       }
     */
     diaryController.getMonthDiary
   )
-  .post('/diary', isAuth,
+  .post('/diary/:foodId', isAuth,
     /*
       #swagger.tags= ['Diary - 營養日記']
       #swagger.description = '新增一筆營養日記 API'

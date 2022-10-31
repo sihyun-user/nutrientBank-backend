@@ -43,7 +43,6 @@ exports.createCustomFood = catchAsync(async (req, res, next) => {
   data = { newCustomFoodId: data._id }
 
   appSuccess({ res, data, message: '新增一筆自訂食品成功' });
-
 });
 
 // 編輯自訂食品 API

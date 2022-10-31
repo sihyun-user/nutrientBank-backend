@@ -44,6 +44,10 @@ const customFood = new mongoose.Schema(
           }
         }
       ],
+      isCustom: {
+        type: Boolean,
+        default: true
+      },
       createdAt: {
         type: Date,
         default: Date.now(),

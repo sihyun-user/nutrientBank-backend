@@ -14,12 +14,12 @@ router.get('/foods',
     }
     #swagger.parameters['page'] = {
       in: 'query',
-      type: 'Number',
+      type: 'String',
       description: '頁數搜尋',
     }
     #swagger.parameters['limit'] = {
       in: 'query',
-      type: 'Number',
+      type: 'String',
       description: '撈取資料筆數',
     }
     #swagger.responses[200] = { 
