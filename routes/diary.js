@@ -38,6 +38,9 @@ router
         schema: { 
           status: true,
           message: '新增一筆營養日記成功',
+          data: {
+            newDiaryId: '營養日記Id'
+          }
         }
       }
     */

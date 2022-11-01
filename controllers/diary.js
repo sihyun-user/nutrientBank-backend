@@ -34,6 +34,7 @@ exports.getMonthDiary = catchAsync(async(req, res, next) => {
   
   appSuccess({res, data: newData, message: '取得今月營養日記列表成功'});
 });
+
 // 新增一則營養日記 API
 exports.createOneDiary = catchAsync(async(req, res, next) => {
   const { quantity, meal, isCustom } = req.body;
@@ -68,6 +69,7 @@ exports.createOneDiary = catchAsync(async(req, res, next) => {
 
   appSuccess({res, data: newData, message: '新增一則營養日記成功'});
 });
+
 // 編輯一筆營養日記 API
 exports.updateOneDiary = catchAsync(async(req, res, next) => {
   const { quantity, meal } = req.body;
@@ -90,7 +92,17 @@ exports.updateOneDiary = catchAsync(async(req, res, next) => {
 
   appSuccess({ res, message: '編輯一筆營養日記成功'});
 });
-//TODO: 刪除一則營養日記 API
-exports.deleteOneDiary = catchAsync(async(req, res, next) => {
 
+// 刪除一筆營養日記 API
+exports.deleteOneDiary = catchAsync(async(req, res, next) => {
+  const diaryId = req.params.diaryId;
+  const userId = req.userId;
+  
+  const data = await Diary.findOneAndDelete({
+    _id: diaryId,
+    user: userId
+  }).exec();
+  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
+
+  appSuccess({ res, message: '刪除一筆營養日記成功'});
 });
