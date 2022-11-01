@@ -889,7 +889,7 @@
         ]
       }
     },
-    "/api/diarys": {
+    "/api/diarys/{year}/{month}": {
       "get": {
         "tags": [
           "Diary - 營養日記"
@@ -898,17 +898,29 @@
         "parameters": [
           {
             "name": "year",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "month",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "year",
             "in": "query",
+            "required": true,
             "type": "String",
-            "description": "年份",
-            "required": true
+            "description": "年份"
           },
           {
             "name": "month",
             "in": "query",
+            "required": true,
             "type": "String",
-            "description": "月份",
-            "required": true
+            "description": "月份"
           }
         ],
         "responses": {
@@ -964,6 +976,15 @@
                 "message": {
                   "type": "string",
                   "example": "新增一筆營養日記成功"
+                },
+                "data": {
+                  "type": "object",
+                  "properties": {
+                    "newDiaryId": {
+                      "type": "string",
+                      "example": "營養日記Id"
+                    }
+                  }
                 }
               },
               "xml": {

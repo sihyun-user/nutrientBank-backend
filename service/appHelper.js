@@ -43,7 +43,7 @@ exports.generateSendJWT = (user, res) => {
   return token;
 };
 
-// TODO: 缺少檢查每個成分的單位值是否正確(是否需要填寫單位)
+// TODO: 缺少檢查每個成分的單位值是否正確(是否需要單位)
 // TODO: 判斷食品重含量是否需要填寫單位克
 exports.verifyFood = (data, next) => {
   let { name, subName, brand, perUnitWeight, nutrition } = data;
