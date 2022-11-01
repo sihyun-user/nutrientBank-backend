@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const foodController = require('../controllers/food');
-const { isAuth } = require('../service/appHelper');
+const { isAuth, isAdmin } = require('../service/appHelper');
 
 router.get('/foods', 
   /*
@@ -42,7 +42,7 @@ router
     */
     foodController.getOneFood
   )
-  .post('/food',
+  .post('/food', isAuth, isAdmin,
     /*
       #swagger.tags = ['Food - 食品']
       #swagger.description = '新增一筆食品 API'
@@ -79,7 +79,7 @@ router
     */
     foodController.createOneFood
   )
-  .patch('/food/:foodId',
+  .patch('/food/:foodId', isAuth, isAdmin,
     /*
       #swagger.tags = ['Food - 食品']
       #swagger.description = '編輯一筆食品 API'
@@ -113,7 +113,7 @@ router
     */
     foodController.updateOneFood
   )
-  .delete('/food/:foodId',
+  .delete('/food/:foodId', isAuth, isAdmin,
   /*
       #swagger.tags = ['Food - 食品']
       #swagger.description = '刪除一筆食品 API'

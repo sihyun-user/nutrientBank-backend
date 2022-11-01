@@ -27,8 +27,14 @@ exports.isAuth = catchAsync(async(req, res, next) => {
   if (!data) return appError({statusCode: 401, message: '尚未登入!'}, next);
 
   req.userId = data._id;
+  req.isAdmin = data.isAdmin;
   next();
 });
+
+exports.isAdmin = (req,res, next) => {
+  if (!req.isAdmin) appError({statusCode: 403, message: '你沒有管理員權限!'}, next);
+  next();
+}
 
 exports.generateSendJWT = (user, res) => {
   const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {

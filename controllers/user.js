@@ -14,7 +14,7 @@ const checkPassword = (password) => {
 
 // 會員註冊 API
 exports.signup = catchAsync(async(req, res, next) => {
-  let { name, email, password, confirmPassword } = req.body;
+  let { name, email, password, confirmPassword, isAdmin } = req.body;
   // 資料欄位正確
   if (!name || !email || !password || !confirmPassword) {
     return appError(apiState.DATA_MISSING, next);
@@ -47,7 +47,7 @@ exports.signup = catchAsync(async(req, res, next) => {
   // 加密密碼
   password = await bcrypt.hash(password, 12);
   
-  await User.create({ name, email, password, confirmPassword });
+  await User.create({ name, email, password, confirmPassword, isAdmin });
 
   appSuccess({ res, message: '註冊成功，請重新登入' });
 });
@@ -91,7 +91,7 @@ exports.login = catchAsync(async(req, res, next) => {
 exports.getProfile = catchAsync(async(req, res, next) => {
   const userId = req.userId;
   const data = await User.findById(userId)
-  .select('-_id')
+  .select('-_id -isAdmin')
   .populate({
     path: 'likes',
     select: '-_id'
@@ -123,7 +123,7 @@ exports.updateProfile = catchAsync(async(req, res, next) => {
 
   const data = await User.findByIdAndUpdate(userId, {
     name, sex, photo
-  },{new: true, runValidators: true}).select('-_id').exec();
+  },{new: true, runValidators: true}).select('-_id -isAdmin').exec();
 
   appSuccess({ res, data, message: '編輯會員資料成功' });
 });
