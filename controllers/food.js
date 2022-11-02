@@ -37,8 +37,8 @@ exports.getOneFood = catchAsync(async (req, res, next) => {
 
 // 新增一筆食品 API
 exports.createOneFood = catchAsync(async (req, res, next) => {
-  const { name, subName, brand, perUnitWeight, nutrition } = req.body;
-  const paramData = { name, subName, brand, perUnitWeight, nutrition };
+  const { name, subName, brand, perUnitWeight, unit, nutrition } = req.body;
+  const paramData = { name, subName, brand, perUnitWeight, unit, nutrition };
 
   appHelper.verifyFood(paramData, next);
 
@@ -50,8 +50,8 @@ exports.createOneFood = catchAsync(async (req, res, next) => {
 
 // 編輯一筆食品 API
 exports.updateOneFood = catchAsync(async (req, res, next) => {
-  let { name, subName, brand, perUnitWeight, nutrition } = req.body;
-  const paramData = { name, subName, brand, perUnitWeight, nutrition };
+  let { name, subName, brand, perUnitWeight, unit, nutrition } = req.body;
+  const paramData = { name, subName, brand, perUnitWeight, unit, nutrition };
   const foodId = req.params.foodId;
 
   appHelper.verifyFood(paramData, next);

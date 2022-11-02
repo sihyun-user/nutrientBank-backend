@@ -321,6 +321,10 @@
                   "type": "string",
                   "example": "食品重含量"
                 },
+                "unit": {
+                  "type": "string",
+                  "example": "食品重含量單位"
+                },
                 "nutrition": {
                   "type": "array",
                   "items": {
@@ -329,10 +333,6 @@
                       "ingredient": {
                         "type": "string",
                         "example": "食品營養成分"
-                      },
-                      "unit": {
-                        "type": "string",
-                        "example": "食品營養成分單位"
                       },
                       "perUnitContent": {
                         "type": "string",
@@ -345,6 +345,7 @@
               "required": [
                 "name",
                 "perUnitWeight",
+                "unit",
                 "nutrition"
               ]
             }
@@ -453,6 +454,10 @@
                   "type": "string",
                   "example": "食品重含量"
                 },
+                "unit": {
+                  "type": "string",
+                  "example": "食品重含量單位"
+                },
                 "nutrition": {
                   "type": "array",
                   "items": {
@@ -461,10 +466,6 @@
                       "ingredient": {
                         "type": "string",
                         "example": "食品營養成分"
-                      },
-                      "unit": {
-                        "type": "string",
-                        "example": "食品營養成分單位"
                       },
                       "perUnitContent": {
                         "type": "string",
@@ -477,6 +478,7 @@
               "required": [
                 "name",
                 "perUnitWeight",
+                "unit",
                 "nutrition"
               ]
             }
@@ -683,6 +685,10 @@
                   "type": "string",
                   "example": "食品重含量"
                 },
+                "unit": {
+                  "type": "string",
+                  "example": "食品重含量單位"
+                },
                 "nutrition": {
                   "type": "array",
                   "items": {
@@ -691,10 +697,6 @@
                       "ingredient": {
                         "type": "string",
                         "example": "食品營養成分"
-                      },
-                      "unit": {
-                        "type": "string",
-                        "example": "食品營養成分單位"
                       },
                       "perUnitContent": {
                         "type": "string",
@@ -707,6 +709,7 @@
               "required": [
                 "name",
                 "perUnitWeight",
+                "unit",
                 "nutrition"
               ]
             }
@@ -788,6 +791,10 @@
                   "type": "string",
                   "example": "食品重含量"
                 },
+                "unit": {
+                  "type": "string",
+                  "example": "食品重含量單位"
+                },
                 "nutrition": {
                   "type": "array",
                   "items": {
@@ -796,10 +803,6 @@
                       "ingredient": {
                         "type": "string",
                         "example": "食品營養成分"
-                      },
-                      "unit": {
-                        "type": "string",
-                        "example": "食品營養成分單位"
                       },
                       "perUnitContent": {
                         "type": "string",
@@ -812,6 +815,7 @@
               "required": [
                 "name",
                 "perUnitWeight",
+                "unit",
                 "nutrition"
               ]
             }
@@ -1220,6 +1224,10 @@
                 "type": "string",
                 "example": "食品重含量"
               },
+              "unit": {
+                "type": "string",
+                "example": "食品重含量單位"
+              },
               "nutrition": {
                 "type": "array",
                 "items": {
@@ -1228,10 +1236,6 @@
                     "ingredient": {
                       "type": "string",
                       "example": "食品營養成分"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "example": "食品營養成分單位"
                     },
                     "perUnitContent": {
                       "type": "string",
@@ -1281,6 +1285,10 @@
                 "type": "string",
                 "example": "食品重含量"
               },
+              "unit": {
+                "type": "string",
+                "example": "食品重含量單位"
+              },
               "nutrition": {
                 "type": "array",
                 "items": {
@@ -1289,10 +1297,6 @@
                     "ingredient": {
                       "type": "string",
                       "example": "食品營養成分"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "example": "食品營養成分單位"
                     },
                     "perUnitContent": {
                       "type": "string",
@@ -1342,6 +1346,10 @@
                 "type": "string",
                 "example": "食品重含量"
               },
+              "unit": {
+                "type": "string",
+                "example": "食品重含量單位"
+              },
               "nutrition": {
                 "type": "array",
                 "items": {
@@ -1350,10 +1358,6 @@
                     "ingredient": {
                       "type": "string",
                       "example": "食品營養成分"
-                    },
-                    "unit": {
-                      "type": "string",
-                      "example": "食品營養成分單位"
                     },
                     "perUnitContent": {
                       "type": "string",
@@ -1398,6 +1402,10 @@
                     "type": "string",
                     "example": "食品重含量"
                   },
+                  "unit": {
+                    "type": "string",
+                    "example": "食品重含量單位"
+                  },
                   "nutrition": {
                     "type": "array",
                     "items": {
@@ -1406,10 +1414,6 @@
                         "ingredient": {
                           "type": "string",
                           "example": "食品營養成分"
-                        },
-                        "unit": {
-                          "type": "string",
-                          "example": "食品營養成分單位"
                         },
                         "perUnitContent": {
                           "type": "string",
@@ -1459,6 +1463,10 @@
                     "type": "string",
                     "example": "食品重含量"
                   },
+                  "unit": {
+                    "type": "string",
+                    "example": "食品重含量單位"
+                  },
                   "nutrition": {
                     "type": "array",
                     "items": {
@@ -1467,10 +1475,6 @@
                         "ingredient": {
                           "type": "string",
                           "example": "食品營養成分"
-                        },
-                        "unit": {
-                          "type": "string",
-                          "example": "食品營養成分單位"
                         },
                         "perUnitContent": {
                           "type": "string",
@@ -1520,6 +1524,10 @@
                     "type": "string",
                     "example": "食品重含量"
                   },
+                  "unit": {
+                    "type": "string",
+                    "example": "食品重含量單位"
+                  },
                   "nutrition": {
                     "type": "array",
                     "items": {
@@ -1528,10 +1536,6 @@
                         "ingredient": {
                           "type": "string",
                           "example": "食品營養成分"
-                        },
-                        "unit": {
-                          "type": "string",
-                          "example": "食品營養成分單位"
                         },
                         "perUnitContent": {
                           "type": "string",
@@ -1581,6 +1585,10 @@
                     "type": "string",
                     "example": "食品重含量"
                   },
+                  "unit": {
+                    "type": "string",
+                    "example": "食品重含量單位"
+                  },
                   "nutrition": {
                     "type": "array",
                     "items": {
@@ -1589,10 +1597,6 @@
                         "ingredient": {
                           "type": "string",
                           "example": "食品營養成分"
-                        },
-                        "unit": {
-                          "type": "string",
-                          "example": "食品營養成分單位"
                         },
                         "perUnitContent": {
                           "type": "string",

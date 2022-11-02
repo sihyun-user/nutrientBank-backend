@@ -60,11 +60,11 @@ const doc = {
         subName: '食品英文名稱',
         brand: '食品品牌',
         perUnitWeight: '食品重含量',
+        unit: '食品重含量單位',
         nutrition:[
           {
-            ingredient: "食品營養成分",
-            unit: "食品營養成分單位",
-            perUnitContent:" 每單位重含量"
+            ingredient: '食品營養成分',
+            perUnitContent:' 每單位重含量'
           }
         ]
       }]
@@ -78,11 +78,11 @@ const doc = {
         subName: '食品英文名稱',
         brand: '食品品牌',
         perUnitWeight: '食品重含量',
+        unit: '食品重含量單位',
         nutrition:[
           {
-            ingredient: "食品營養成分",
-            unit: "食品營養成分單位",
-            perUnitContent:" 每單位重含量"
+            ingredient: '食品營養成分',
+            perUnitContent:' 每單位重含量'
           }
         ]
       }]
@@ -96,11 +96,11 @@ const doc = {
         subName: '食品英文名稱',
         brand: '食品品牌',
         perUnitWeight: '食品重含量',
+        unit: '食品重含量單位',
         nutrition:[
           {
-            ingredient: "食品營養成分",
-            unit: "食品營養成分單位",
-            perUnitContent:" 每單位重含量"
+            ingredient: '食品營養成分',
+            perUnitContent:' 每單位重含量'
           }
         ]
       }]
@@ -114,11 +114,11 @@ const doc = {
             subName: '食品英文名稱',
             brand: '食品品牌',
             perUnitWeight: '食品重含量',
+            unit: '食品重含量單位',
             nutrition:[
               {
-                ingredient: "食品營養成分",
-                unit: "食品營養成分單位",
-                perUnitContent:" 每單位重含量"
+                ingredient: '食品營養成分',
+                perUnitContent:' 每單位重含量'
               }
             ]
           },
@@ -134,11 +134,11 @@ const doc = {
             subName: '食品英文名稱',
             brand: '食品品牌',
             perUnitWeight: '食品重含量',
+            unit: '食品重含量單位',
             nutrition:[
               {
-                ingredient: "食品營養成分",
-                unit: "食品營養成分單位",
-                perUnitContent:" 每單位重含量"
+                ingredient: '食品營養成分',
+                perUnitContent:' 每單位重含量'
               }
             ]
           },
@@ -154,11 +154,11 @@ const doc = {
             subName: '食品英文名稱',
             brand: '食品品牌',
             perUnitWeight: '食品重含量',
+            unit: '食品重含量單位',
             nutrition:[
               {
-                ingredient: "食品營養成分",
-                unit: "食品營養成分單位",
-                perUnitContent:" 每單位重含量"
+                ingredient: '食品營養成分',
+                perUnitContent:' 每單位重含量'
               }
             ]
           },
@@ -174,11 +174,11 @@ const doc = {
             subName: '食品英文名稱',
             brand: '食品品牌',
             perUnitWeight: '食品重含量',
+            unit: '食品重含量單位',
             nutrition:[
               {
-                ingredient: "食品營養成分",
-                unit: "食品營養成分單位",
-                perUnitContent:" 每單位重含量"
+                ingredient: '食品營養成分',
+                perUnitContent:' 每單位重含量'
               }
             ]
           },

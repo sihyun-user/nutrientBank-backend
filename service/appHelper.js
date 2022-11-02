@@ -34,7 +34,7 @@ exports.isAuth = catchAsync(async(req, res, next) => {
 exports.isAdmin = (req,res, next) => {
   if (!req.isAdmin) appError({statusCode: 403, message: '你沒有管理員權限!'}, next);
   next();
-}
+};
 
 exports.generateSendJWT = (user, res) => {
   const token = jwt.sign({id:user._id}, process.env.JWT_SECRET, {
@@ -43,13 +43,12 @@ exports.generateSendJWT = (user, res) => {
   return token;
 };
 
-// TODO: 缺少檢查每個成分的單位值是否正確(是否需要單位)
-// TODO: 判斷食品重含量是否需要填寫單位克
+// TODO 驗證
 exports.verifyFood = (data, next) => {
-  let { name, subName, brand, perUnitWeight, nutrition } = data;
+  let { name, subName, brand, perUnitWeight, unit, nutrition } = data;
   let ingredientType = ['糖','碳水化合物', '反式脂肪', '熱量', '脂肪', '蛋白質', '鈉', '飽和脂肪'];
-  let unitType = ['g', 'mg', 'ml', 'kcal'];
-  // 資料欄位正確
+  const unitType = ['克','毫升'];
+  // 食品名稱欄位正確
   if (!name) {
     return appError({statusCode: 400, message:'食品名稱為必填欄位'}, next);
   };
@@ -77,13 +76,21 @@ exports.verifyFood = (data, next) => {
   if (brand && !validator.isLength(brand.trim(), {min:2})) {
     return appError({statusCode: 400, message:'食品品牌名稱低於2個字元'}, next);
   };
-  // 食品重含量不為空白(選填)
-  if (perUnitWeight && validator.isEmpty(perUnitWeight.trim())) {
-    return appError({statusCode: 400, message:'食品重含量不為空白'}, next);
+  // 食品重含量欄位正確
+  if (!perUnitWeight) {
+    return appError({statusCode: 400, message:'食品重含量必填欄位'}, next);
   };
-  // 食品重含量2個字元以上且包含單位(選填)
-  if (perUnitWeight && (!validator.isLength(perUnitWeight.trim(), {min:2}) || !perUnitWeight.includes('克'))) {
-    return appError({statusCode: 400, message:'食品重含量未填寫正確(2個字元以上且包含單位(克))'}, next);
+  // 食品重含量不為負值
+  if (perUnitWeight < 0) {
+    return appError({statusCode: 400, message:'食品重含量未填寫正確'}, next);
+  };
+  // 食品重含量單位欄位正確
+  if (!unit) {
+    return appError({statusCode: 400, message:'食品重含量單位必填欄位'}, next);
+  };
+  // 食品重含量單位驗證
+  if (!unitType.includes(unit.trim())) {
+    return appError({statusCode: 400, message:'食品重含量單位未填寫正確(克、毫升)'}, next);
   };
   // 食品營養成分欄位正確
   if (nutrition.length !== 8) {
@@ -93,11 +100,7 @@ exports.verifyFood = (data, next) => {
       if (!ingredientType.includes(nut.ingredient)) {
         return appError({statusCode: 400, message:`食品營養成分名稱未填寫正確(${ingredientType})`}, next);
       };
-      if (!unitType.some(type => nut.unit == type)) {
-        return appError({statusCode: 400, message:`食品營養成分單位未填寫正確(${unitType})`}, next);
-      };
-      let newCount = nut.perUnitContent.trim();
-      if (newCount < 0) {
+      if (nut.perUnitContent < 0) {
         return appError({statusCode: 400, message:'食品營養成分重含量未填寫正確'}, next);
       };
     });
