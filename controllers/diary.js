@@ -9,30 +9,41 @@ const apiState = require('../service/apiState');
 
 const mealType = ['breakfast', 'lunch', 'dinner', 'dessert'];
 
-// 取得今月營養日記列表 API
+// 取得營養日記列表 API
 exports.getMonthDiary = catchAsync(async(req, res, next) => {
-  const { year, month } = req.params; 
+  const entry_date = req.query.entry_date;
   const userId = req.userId;
-  // 參數資料正確
-  if ((!year || !month)) {
-    return appError({statusCode: 400, message:'年、月份參數未填寫正確'}, next);
-  };
 
-  const startDate = new Date(`${year}-${month}-1`);
-  const endDate = new Date(`${year}-${month}-31`);
-  const createdAt = {
-    createdAt: {
-      $gte: new Date(new Date(startDate).setHours(00, 00, 00)),
-      $lt: new Date(new Date(endDate).setHours(23, 59, 59))
-    }
-  };
-  const data = await Diary.find({ user: userId, ...createdAt }).select('-_id -user');
-  if(!data) return appError(apiState.DATA_NOT_FOUND);
+  const date = entry_date ? new Date(entry_date) : new Date();
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const startDate = new Date(new Date(`${year}-${month}-1`).setHours(00, 00, 00));
+  const endDate = new Date(new Date(`${year}-${month}-31`).setHours(23, 59, 59));
 
-  let newData = {};
-  mealType.forEach((el) => newData[el] = data.filter(item => el == item.meal));
-  
-  appSuccess({res, data: newData, message: '取得今月營養日記列表成功'});
+  const data = await Diary.aggregate([
+    { 
+      $match: { 
+        user : userId,
+        createdAt: { $gte: startDate, $lt: endDate }
+      }
+    },
+    {
+      $sort: { createdAt: -1 }
+    },
+    {
+      $group: { 
+        _id: { 
+          diaryId: "$_id", idmeal: '$meal', food: '$food', quantity: '$quantity', 
+          date: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } } 
+        }
+      }
+    },
+    { 
+      $project: { _id: 0, diaryId: '$_id.diaryId', date: '$_id.date', meal: '$_id.meal', quantity: '$_id.quantity', food: '$_id.food' } 
+    },
+  ]);
+
+  appSuccess({res, data, message: '取得今月營養日記列表成功'});
 });
 
 // 新增一則營養日記 API

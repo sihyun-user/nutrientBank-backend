@@ -106,86 +106,27 @@ const doc = {
       }]
     },
     getMonthdiarys: {
-      breakfast: [
-        {
-          food: {
-            _id: '食品Id',
-            name: '食品名稱',
-            subName: '食品英文名稱',
-            brand: '食品品牌',
-            perUnitWeight: '食品重含量',
-            unit: '食品重含量單位',
-            nutrition:[
-              {
-                ingredient: '食品營養成分',
-                perUnitContent:' 每單位重含量'
-              }
-            ]
-          },
-          meal: '餐別類型(breakfast、lunch、dinner、dessert)',
-          createdAt: '建立時間'
+      status: true,
+      message: '取得今月營養日記列表成功',
+      data: [{
+        date: 'YY-MM-DD',
+        meal: '餐別類型',
+        quantity: '份量',
+        food: {
+          _id: '食品Id',
+          name: '食品名稱',
+          subName: '食品英文名稱',
+          brand: '食品品牌',
+          perUnitWeight: '食品重含量',
+          unit: '食品重含量單位',
+          nutrition:[
+            {
+              ingredient: '食品營養成分',
+              perUnitContent:' 每單位重含量'
+            }
+          ]
         }
-      ],
-      lunch: [
-        {
-          food: {
-            _id: '食品Id',
-            name: '食品名稱',
-            subName: '食品英文名稱',
-            brand: '食品品牌',
-            perUnitWeight: '食品重含量',
-            unit: '食品重含量單位',
-            nutrition:[
-              {
-                ingredient: '食品營養成分',
-                perUnitContent:' 每單位重含量'
-              }
-            ]
-          },
-          meal: '餐別類型(breakfast、lunch、dinner、dessert)',
-          createdAt: '建立時間'
-        }
-      ],
-      dinner: [
-        {
-          food: {
-            _id: '食品Id',
-            name: '食品名稱',
-            subName: '食品英文名稱',
-            brand: '食品品牌',
-            perUnitWeight: '食品重含量',
-            unit: '食品重含量單位',
-            nutrition:[
-              {
-                ingredient: '食品營養成分',
-                perUnitContent:' 每單位重含量'
-              }
-            ]
-          },
-          meal: '餐別類型(breakfast、lunch、dinner、dessert)',
-          createdAt: '建立時間'
-        }
-      ],
-      dessert: [
-        {
-          food: {
-            _id: '食品Id',
-            name: '食品名稱',
-            subName: '食品英文名稱',
-            brand: '食品品牌',
-            perUnitWeight: '食品重含量',
-            unit: '食品重含量單位',
-            nutrition:[
-              {
-                ingredient: '食品營養成分',
-                perUnitContent:' 每單位重含量'
-              }
-            ]
-          },
-          meal: '餐別類型(breakfast、lunch、dinner、dessert)',
-          createdAt: '建立時間'
-        }
-      ]
+      }]
     }
 	}
 };
