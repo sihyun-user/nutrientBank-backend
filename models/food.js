@@ -25,20 +25,32 @@ const foodSchema = new mongoose.Schema(
       enum: ['克', '毫升'],
       required: [true, '食品重含量單位未填寫正確']
     },
-    nutrition: [
-      {
-        _id: false,
-        ingredient: {
-          type: String,
-          default: '糖',
-          enum: ['糖','碳水化合物', '反式脂肪', '熱量', '脂肪', '蛋白質', '鈉', '飽和脂肪'],
-        },
-        perUnitContent: {
-          type: Number,
-          default: 0
-        }
-      }
-    ],
+    // nutrition: [
+    //   {
+    //     _id: false,
+    //     ingredient: {
+    //       type: String,
+    //       default: '糖',
+    //       enum: ['糖','碳水化合物', '反式脂肪', '熱量', '脂肪', '蛋白質', '鈉', '飽和脂肪'],
+    //     },
+    //     perUnitContent: {
+    //       type: Number,
+    //       default: 0
+    //     }
+    //   }
+    // ],
+    nutrition: {
+      type: Object,
+      calories: 0,
+      carbohydrates: 0,
+      protein: 0,
+      fat: 0,
+      saturated_fat: 0,
+      trans_fat: 0,
+      sodium: 0,
+      sugar: 0,
+      required: [true, '食品營養成分未填寫正確']
+    },
     createdAt: {
       type: Date,
       default: Date.now(),
