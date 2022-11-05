@@ -18,11 +18,11 @@ router
         schema: { 
           status: true,
           message: '取得今月營養日記列表成功',
-          schema: { $ref: '#/definitions/getMonthdiarys' }
+          schema: { $ref: '#/definitions/getDiarys' }
         }
       }
     */
-    diaryController.getMonthDiary
+    diaryController.getDiarys
   )
   .post('/diary/:foodId', isAuth,
     /*

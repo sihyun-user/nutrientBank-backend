@@ -47,12 +47,16 @@ router
           brand: '食品品牌',
           $perUnitWeight: '食品重含量',
           $unit: '食品重含量單位',
-          $nutrition:[
-            {
-              ingredient: '食品營養成分',
-              perUnitContent: '每單位重含量'
-            }
-          ]
+          $nutrition: {
+            calories: '卡路里含量',
+            carbohydrates: '碳水化合物含量',
+            protein: '蛋白質含量',
+            fat: '脂肪含量',
+            saturated_fat: '飽和脂肪含量',
+            trans_fat: '反式脂肪含量',
+            sodium: '納含量',
+            sugar: '糖含量',
+          }
         }
       }
       #swagger.responses[200] = { 
@@ -84,12 +88,16 @@ router
           brand: '食品品牌',
           $perUnitWeight: '食品重含量',
           $unit: '食品重含量單位',
-          $nutrition:[
-            {
-              ingredient: '食品營養成分',
-              perUnitContent: '每單位重含量'
-            }
-          ]
+          $nutrition: {
+            calories: '卡路里含量',
+            carbohydrates: '碳水化合物含量',
+            protein: '蛋白質含量',
+            fat: '脂肪含量',
+            saturated_fat: '飽和脂肪含量',
+            trans_fat: '反式脂肪含量',
+            sodium: '納含量',
+            sugar: '糖含量',
+          }
         }
       }
       #swagger.responses[200] = { 

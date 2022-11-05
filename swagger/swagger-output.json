@@ -326,18 +326,39 @@
                   "example": "食品重含量單位"
                 },
                 "nutrition": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "ingredient": {
-                        "type": "string",
-                        "example": "食品營養成分"
-                      },
-                      "perUnitContent": {
-                        "type": "string",
-                        "example": "每單位重含量"
-                      }
+                  "type": "object",
+                  "properties": {
+                    "calories": {
+                      "type": "string",
+                      "example": "卡路里含量"
+                    },
+                    "carbohydrates": {
+                      "type": "string",
+                      "example": "碳水化合物含量"
+                    },
+                    "protein": {
+                      "type": "string",
+                      "example": "蛋白質含量"
+                    },
+                    "fat": {
+                      "type": "string",
+                      "example": "脂肪含量"
+                    },
+                    "saturated_fat": {
+                      "type": "string",
+                      "example": "飽和脂肪含量"
+                    },
+                    "trans_fat": {
+                      "type": "string",
+                      "example": "反式脂肪含量"
+                    },
+                    "sodium": {
+                      "type": "string",
+                      "example": "納含量"
+                    },
+                    "sugar": {
+                      "type": "string",
+                      "example": "糖含量"
                     }
                   }
                 }
@@ -459,18 +480,39 @@
                   "example": "食品重含量單位"
                 },
                 "nutrition": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "ingredient": {
-                        "type": "string",
-                        "example": "食品營養成分"
-                      },
-                      "perUnitContent": {
-                        "type": "string",
-                        "example": "每單位重含量"
-                      }
+                  "type": "object",
+                  "properties": {
+                    "calories": {
+                      "type": "string",
+                      "example": "卡路里含量"
+                    },
+                    "carbohydrates": {
+                      "type": "string",
+                      "example": "碳水化合物含量"
+                    },
+                    "protein": {
+                      "type": "string",
+                      "example": "蛋白質含量"
+                    },
+                    "fat": {
+                      "type": "string",
+                      "example": "脂肪含量"
+                    },
+                    "saturated_fat": {
+                      "type": "string",
+                      "example": "飽和脂肪含量"
+                    },
+                    "trans_fat": {
+                      "type": "string",
+                      "example": "反式脂肪含量"
+                    },
+                    "sodium": {
+                      "type": "string",
+                      "example": "納含量"
+                    },
+                    "sugar": {
+                      "type": "string",
+                      "example": "糖含量"
                     }
                   }
                 }
@@ -690,18 +732,39 @@
                   "example": "食品重含量單位"
                 },
                 "nutrition": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "ingredient": {
-                        "type": "string",
-                        "example": "食品營養成分"
-                      },
-                      "perUnitContent": {
-                        "type": "string",
-                        "example": "每單位重含量"
-                      }
+                  "type": "object",
+                  "properties": {
+                    "calories": {
+                      "type": "string",
+                      "example": "卡路里含量"
+                    },
+                    "carbohydrates": {
+                      "type": "string",
+                      "example": "碳水化合物含量"
+                    },
+                    "protein": {
+                      "type": "string",
+                      "example": "蛋白質含量"
+                    },
+                    "fat": {
+                      "type": "string",
+                      "example": "脂肪含量"
+                    },
+                    "saturated_fat": {
+                      "type": "string",
+                      "example": "飽和脂肪含量"
+                    },
+                    "trans_fat": {
+                      "type": "string",
+                      "example": "反式脂肪含量"
+                    },
+                    "sodium": {
+                      "type": "string",
+                      "example": "納含量"
+                    },
+                    "sugar": {
+                      "type": "string",
+                      "example": "糖含量"
                     }
                   }
                 }
@@ -796,18 +859,39 @@
                   "example": "食品重含量單位"
                 },
                 "nutrition": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "ingredient": {
-                        "type": "string",
-                        "example": "食品營養成分"
-                      },
-                      "perUnitContent": {
-                        "type": "string",
-                        "example": "每單位重含量"
-                      }
+                  "type": "object",
+                  "properties": {
+                    "calories": {
+                      "type": "string",
+                      "example": "卡路里含量"
+                    },
+                    "carbohydrates": {
+                      "type": "string",
+                      "example": "碳水化合物含量"
+                    },
+                    "protein": {
+                      "type": "string",
+                      "example": "蛋白質含量"
+                    },
+                    "fat": {
+                      "type": "string",
+                      "example": "脂肪含量"
+                    },
+                    "saturated_fat": {
+                      "type": "string",
+                      "example": "飽和脂肪含量"
+                    },
+                    "trans_fat": {
+                      "type": "string",
+                      "example": "反式脂肪含量"
+                    },
+                    "sodium": {
+                      "type": "string",
+                      "example": "納含量"
+                    },
+                    "sugar": {
+                      "type": "string",
+                      "example": "糖含量"
                     }
                   }
                 }
@@ -922,7 +1006,7 @@
                   "example": "取得今月營養日記列表成功"
                 },
                 "schema": {
-                  "$ref": "#/definitions/getMonthdiarys"
+                  "$ref": "#/definitions/getDiarys"
                 }
               },
               "xml": {
@@ -1209,18 +1293,39 @@
                 "example": "食品重含量單位"
               },
               "nutrition": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "ingredient": {
-                      "type": "string",
-                      "example": "食品營養成分"
-                    },
-                    "perUnitContent": {
-                      "type": "string",
-                      "example": " 每單位重含量"
-                    }
+                "type": "object",
+                "properties": {
+                  "calories": {
+                    "type": "string",
+                    "example": "卡路里含量"
+                  },
+                  "carbohydrates": {
+                    "type": "string",
+                    "example": "碳水化合物含量"
+                  },
+                  "protein": {
+                    "type": "string",
+                    "example": "蛋白質含量"
+                  },
+                  "fat": {
+                    "type": "string",
+                    "example": "脂肪含量"
+                  },
+                  "saturated_fat": {
+                    "type": "string",
+                    "example": "飽和脂肪含量"
+                  },
+                  "trans_fat": {
+                    "type": "string",
+                    "example": "反式脂肪含量"
+                  },
+                  "sodium": {
+                    "type": "string",
+                    "example": "納含量"
+                  },
+                  "sugar": {
+                    "type": "string",
+                    "example": "糖含量"
                   }
                 }
               }
@@ -1270,18 +1375,39 @@
                 "example": "食品重含量單位"
               },
               "nutrition": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "ingredient": {
-                      "type": "string",
-                      "example": "食品營養成分"
-                    },
-                    "perUnitContent": {
-                      "type": "string",
-                      "example": " 每單位重含量"
-                    }
+                "type": "object",
+                "properties": {
+                  "calories": {
+                    "type": "string",
+                    "example": "卡路里含量"
+                  },
+                  "carbohydrates": {
+                    "type": "string",
+                    "example": "碳水化合物含量"
+                  },
+                  "protein": {
+                    "type": "string",
+                    "example": "蛋白質含量"
+                  },
+                  "fat": {
+                    "type": "string",
+                    "example": "脂肪含量"
+                  },
+                  "saturated_fat": {
+                    "type": "string",
+                    "example": "飽和脂肪含量"
+                  },
+                  "trans_fat": {
+                    "type": "string",
+                    "example": "反式脂肪含量"
+                  },
+                  "sodium": {
+                    "type": "string",
+                    "example": "納含量"
+                  },
+                  "sugar": {
+                    "type": "string",
+                    "example": "糖含量"
                   }
                 }
               }
@@ -1331,18 +1457,39 @@
                 "example": "食品重含量單位"
               },
               "nutrition": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "ingredient": {
-                      "type": "string",
-                      "example": "食品營養成分"
-                    },
-                    "perUnitContent": {
-                      "type": "string",
-                      "example": " 每單位重含量"
-                    }
+                "type": "object",
+                "properties": {
+                  "calories": {
+                    "type": "string",
+                    "example": "卡路里含量"
+                  },
+                  "carbohydrates": {
+                    "type": "string",
+                    "example": "碳水化合物含量"
+                  },
+                  "protein": {
+                    "type": "string",
+                    "example": "蛋白質含量"
+                  },
+                  "fat": {
+                    "type": "string",
+                    "example": "脂肪含量"
+                  },
+                  "saturated_fat": {
+                    "type": "string",
+                    "example": "飽和脂肪含量"
+                  },
+                  "trans_fat": {
+                    "type": "string",
+                    "example": "反式脂肪含量"
+                  },
+                  "sodium": {
+                    "type": "string",
+                    "example": "納含量"
+                  },
+                  "sugar": {
+                    "type": "string",
+                    "example": "糖含量"
                   }
                 }
               }
@@ -1351,7 +1498,7 @@
         }
       }
     },
-    "getMonthdiarys": {
+    "getDiarys": {
       "type": "object",
       "properties": {
         "status": {
@@ -1367,6 +1514,10 @@
           "items": {
             "type": "object",
             "properties": {
+              "diaryId": {
+                "type": "string",
+                "example": "日記Id"
+              },
               "date": {
                 "type": "string",
                 "example": "YY-MM-DD"
@@ -1407,18 +1558,39 @@
                     "example": "食品重含量單位"
                   },
                   "nutrition": {
-                    "type": "array",
-                    "items": {
-                      "type": "object",
-                      "properties": {
-                        "ingredient": {
-                          "type": "string",
-                          "example": "食品營養成分"
-                        },
-                        "perUnitContent": {
-                          "type": "string",
-                          "example": " 每單位重含量"
-                        }
+                    "type": "object",
+                    "properties": {
+                      "calories": {
+                        "type": "string",
+                        "example": "卡路里含量"
+                      },
+                      "carbohydrates": {
+                        "type": "string",
+                        "example": "碳水化合物含量"
+                      },
+                      "protein": {
+                        "type": "string",
+                        "example": "蛋白質含量"
+                      },
+                      "fat": {
+                        "type": "string",
+                        "example": "脂肪含量"
+                      },
+                      "saturated_fat": {
+                        "type": "string",
+                        "example": "飽和脂肪含量"
+                      },
+                      "trans_fat": {
+                        "type": "string",
+                        "example": "反式脂肪含量"
+                      },
+                      "sodium": {
+                        "type": "string",
+                        "example": "納含量"
+                      },
+                      "sugar": {
+                        "type": "string",
+                        "example": "糖含量"
                       }
                     }
                   }

@@ -1,4 +1,3 @@
-const User = require('../models/user');
 const Food = require('../models/food');
 const CustomFood = require('../models/customFood');
 const Diary = require('../models/diary');
@@ -10,7 +9,7 @@ const apiState = require('../service/apiState');
 const mealType = ['breakfast', 'lunch', 'dinner', 'dessert'];
 
 // 取得營養日記列表 API
-exports.getMonthDiary = catchAsync(async(req, res, next) => {
+exports.getDiarys = catchAsync(async(req, res, next) => {
   const entry_date = req.query.entry_date;
   const userId = req.userId;
 
@@ -33,7 +32,7 @@ exports.getMonthDiary = catchAsync(async(req, res, next) => {
     {
       $group: { 
         _id: { 
-          diaryId: "$_id", idmeal: '$meal', food: '$food', quantity: '$quantity', 
+          diaryId: "$_id", meal: '$meal', food: '$food', quantity: '$quantity', 
           date: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } } 
         }
       }
