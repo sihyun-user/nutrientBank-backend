@@ -5,7 +5,7 @@
     "description": "營養日記文件",
     "version": "1.0.0"
   },
-  "host": "localhost:3005",
+  "host": "nutrientbank-app-backend.onrender.com",
   "basePath": "",
   "schemes": [
     "http",
@@ -1245,8 +1245,8 @@
               "example": "頭貼網址"
             },
             "sex": {
-              "type": "string",
-              "example": "[male、female]"
+              "type": "number",
+              "example": 1
             }
           }
         }
