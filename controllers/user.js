@@ -117,8 +117,8 @@ exports.updateProfile = catchAsync(async(req, res, next) => {
     return appError({statusCode: 400, message:'暱稱低於2個字元'}, next);
   };
   // 性別正確
-  if (sex !== 'male' && sex !== 'female') {
-    return appError({statusCode: 400, message:'性別未填寫正確(male、female)'}, next);
+  if (sex !== 0 && sex !== 1) {
+    return appError({statusCode: 400, message:'性別未填寫正確(男 1、女 0)'}, next);
   };
 
   const data = await User.findByIdAndUpdate(userId, {

@@ -17,12 +17,12 @@ const userSchema = new mongoose.Schema(
       default: ''
     },
     sex: {
-      type: String,
+      type: Number,
       enum: {
-        values: ['male', 'female'],
-        message: '性別未填寫正確(male、female)',
+        values: [0, 1],
+        message: '性別未填寫正確(男 1、女 0)',
       },
-      default: 'male'
+      default: 1
     },
     password: {
       type: String,

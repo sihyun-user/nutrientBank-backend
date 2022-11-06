@@ -48,7 +48,7 @@ const doc = {
         name: '會員名稱',
         email: '會員E-mail',
         photo: '頭貼網址',
-        sex: '[male、female]'
+        sex: 1
       }
     },
 		getAllFood: {
