@@ -40,6 +40,9 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
     { 
       $project: { _id: 0, diaryId: '$_id.diaryId', date: '$_id.date', meal: '$_id.meal', quantity: '$_id.quantity', food: '$_id.food' } 
     },
+    { 
+      $unset: ['food._id']
+    }
   ]);
 
   appSuccess({res, data, message: '取得今月營養日記列表成功'});
