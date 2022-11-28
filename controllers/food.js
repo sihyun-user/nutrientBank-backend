@@ -8,7 +8,7 @@ const appHelper = require('../service/appHelper');
 
 // 取得食品列表 API
 exports.getAllFood = catchAsync(async (req, res, next) => {
-  let { search, page = 1, limit = 10 } = req.query;
+  let { search, page = 1, limit = 6 } = req.query;
 
   let newSearch = search !== undefined ? search.trim() : '';
   let keyword = search !== undefined ? { 
@@ -18,11 +18,13 @@ exports.getAllFood = catchAsync(async (req, res, next) => {
     ]
   } : {};
 
-  const data = await Food.find(keyword)
+  const list = await Food.find(keyword)
   .limit(limit)
   .skip((page - 1) * limit).exec();
 
-  appSuccess({ res, data, message: '取得食品列表成功' });
+  const count = await Food.find(keyword).count().exec();
+
+  appSuccess({ res, data: { count, list }, message: '取得食品列表成功' });
 });
 
 // 取得一筆食品 API

@@ -54,29 +54,32 @@ const doc = {
 		getAllFood: {
       status: true,
       message: '取得食品列表成功',
-      data: [{
-        _id: '食品Id',
-        name: '食品名稱',
-        subName: '食品英文名稱',
-        brand: '食品品牌',
-        perUnitWeight: '食品重含量',
-        unit: '食品重含量單位',
-        nutrition: {
-          calories: '卡路里含量',
-          carbohydrates: '碳水化合物含量',
-          protein: '蛋白質含量',
-          fat: '脂肪含量',
-          saturated_fat: '飽和脂肪含量',
-          trans_fat: '反式脂肪含量',
-          sodium: '納含量',
-          sugar: '糖含量',
-        }
-      }]
+      data: {
+        count: '食品列表總筆數',
+        list:[{
+          _id: '食品Id',
+          name: '食品名稱',
+          subName: '食品英文名稱',
+          brand: '食品品牌',
+          perUnitWeight: '食品重含量',
+          unit: '食品重含量單位',
+          nutrition: {
+            calories: '卡路里含量',
+            carbohydrates: '碳水化合物含量',
+            protein: '蛋白質含量',
+            fat: '脂肪含量',
+            saturated_fat: '飽和脂肪含量',
+            trans_fat: '反式脂肪含量',
+            sodium: '納含量',
+            sugar: '糖含量',
+          }
+        }]
+      }
     },
     getOneFood: {
       status: true,
       message: '取得一筆食品成功',
-      data: [{
+      data: {
         _id: '食品Id',
         name: '食品名稱',
         subName: '食品英文名稱',
@@ -93,7 +96,7 @@ const doc = {
           sodium: '納含量',
           sugar: '糖含量',
         }
-      }]
+      }
     },
     getAllCustomFood: {
       status: true,

@@ -61,4 +61,11 @@ const customFood = new mongoose.Schema(
 
 const CustomFood = mongoose.model('CustomFood', customFood);
 
+customFood.set('toJSON', {
+  transform: function (doc, ret, options) {
+    ret.id = ret._id;
+    delete ret._id;
+  }
+});
+
 module.exports = CustomFood;
