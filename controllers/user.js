@@ -78,9 +78,9 @@ exports.login = catchAsync(async(req, res, next) => {
   };
   const token = appHelper.generateSendJWT(user, res);
 
-  const { name, _id, photo, sex } = user;
+  const { name, id, photo, sex } = user;
   let data = {
-    user : { name, email, _id, photo, sex },
+    user : { name, email, id, photo, sex },
     token
   };
   
