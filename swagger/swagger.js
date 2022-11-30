@@ -22,7 +22,7 @@ const doc = {
       nessage: '登入成功',
       data: {
         user: {
-          _id: '會員Id',
+          id: '會員Id',
           name: '會員名稱',
           email: '會員E-mail',
           photo: '頭貼網址',
@@ -57,7 +57,7 @@ const doc = {
       data: {
         count: '食品列表總筆數',
         list:[{
-          _id: '食品Id',
+          id: '食品Id',
           name: '食品名稱',
           subName: '食品英文名稱',
           brand: '食品品牌',
@@ -80,7 +80,7 @@ const doc = {
       status: true,
       message: '取得一筆食品成功',
       data: {
-        _id: '食品Id',
+        id: '食品Id',
         name: '食品名稱',
         subName: '食品英文名稱',
         brand: '食品品牌',
@@ -102,7 +102,7 @@ const doc = {
       status: true,
       message: '取得自訂食品列表成功',
       data: [{
-        _id: '自訂食品Id',
+        id: '自訂食品Id',
         name: '食品名稱',
         subName: '食品英文名稱',
         brand: '食品品牌',
@@ -128,8 +128,9 @@ const doc = {
         date: 'YY-MM-DD',
         meal: '餐別類型',
         quantity: '份量',
+        type: '食品類型',
+        foodId: '食品Id',
         food: {
-          _id: '食品Id',
           name: '食品名稱',
           subName: '食品英文名稱',
           brand: '食品品牌',

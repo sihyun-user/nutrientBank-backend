@@ -43,10 +43,6 @@ const customFood = new mongoose.Schema(
         sugar: 0,
         required: [true, '食品營養成分未填寫正確']
       },
-      isCustom: {
-        type: Boolean,
-        default: true
-      },
       createdAt: {
         type: Date,
         default: Date.now(),
@@ -59,7 +55,7 @@ const customFood = new mongoose.Schema(
   }
 );
 
-const CustomFood = mongoose.model('CustomFood', customFood);
+const CustomFood = mongoose.model('Customfood', customFood);
 
 customFood.set('toJSON', {
   transform: function (doc, ret, options) {

@@ -8,8 +8,14 @@ const diarySchema = new mongoose.Schema(
       required: [true, '用戶Id未填寫正確']
     },
     food: {
-      type: Object,
-      required: [true, '食品未填寫正確']
+      type: mongoose.Schema.ObjectId,
+      ref: 'Food',
+      default: null
+    },
+    customFood: {
+      type: mongoose.Schema.ObjectId,
+      ref: 'customFood',
+      default: null
     },
     quantity: {
       type: Number,
@@ -22,9 +28,10 @@ const diarySchema = new mongoose.Schema(
       defaule: 'breakfast',
       required: [true, '餐別類型未填寫正確']
     },
-    isCustom: {
-      type: Boolean,
-      defaule: false
+    type: {
+      type: String,
+      enum: ['food', 'customFood'],
+      required: [true, '食品類型未填寫正確']
     },
     createdAt: {
       type: Date,

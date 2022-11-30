@@ -23,7 +23,9 @@ exports.getAllCustomFood = catchAsync(async (req, res, next) => {
   .skip((page - 1) * limit).exec();
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
-  let newData = data.map(item => item.food);
+  let newData = data.map(item => {
+    return { ...item.food, id: item.id }
+  });
 
   appSuccess({ res, data: newData ,message: '取得自訂食品列表' });
 });

@@ -8,6 +8,7 @@ router
     /*
       #swagger.tags= ['Diary - 營養日記']
       #swagger.description = '取得月份營養日記列表 API'
+      #swagger.security = [{'api_key': ['apiKeyAuth']}]
       #swagger.parameters['entry_date'] = {
         in: 'query',
         type: 'String',
@@ -28,6 +29,7 @@ router
     /*
       #swagger.tags= ['Diary - 營養日記']
       #swagger.description = '新增一筆營養日記 API'
+      #swagger.security = [{'api_key': ['apiKeyAuth']}]
       #swagger.responses[200] = { 
         description: '營養資訊',
         schema: { 
@@ -45,6 +47,7 @@ router
     /*
       #swagger.tags= ['Diary - 營養日記']
       #swagger.description = '編輯一筆營養日記 API'
+      #swagger.security = [{'api_key': ['apiKeyAuth']}]
       #swagger.responses[200] = { 
         description: '營養資訊',
         schema: { 
@@ -59,6 +62,7 @@ router
     /*
       #swagger.tags= ['Diary - 營養日記']
       #swagger.description = '刪除一筆營養日記 API'
+      #swagger.security = [{'api_key': ['apiKeyAuth']}]
       #swagger.responses[200] = { 
         description: '營養資訊',
         schema: { 

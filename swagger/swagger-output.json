@@ -5,7 +5,7 @@
     "description": "營養日記文件",
     "version": "1.0.0"
   },
-  "host": "localhost:3005",
+  "host": "nutrientbank-app-backend.onrender.com",
   "basePath": "",
   "schemes": [
     "http",
@@ -1014,7 +1014,14 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
       }
     },
     "/api/diary/{foodId}": {
@@ -1060,7 +1067,14 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
       }
     },
     "/api/diary/{diaryId}": {
@@ -1097,7 +1111,14 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
       },
       "delete": {
         "tags": [
@@ -1132,7 +1153,14 @@
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
       }
     }
   },
@@ -1154,7 +1182,7 @@
             "user": {
               "type": "object",
               "properties": {
-                "_id": {
+                "id": {
                   "type": "string",
                   "example": "會員Id"
                 },
@@ -1275,7 +1303,7 @@
               "items": {
                 "type": "object",
                 "properties": {
-                  "_id": {
+                  "id": {
                     "type": "string",
                     "example": "食品Id"
                   },
@@ -1357,7 +1385,7 @@
         "data": {
           "type": "object",
           "properties": {
-            "_id": {
+            "id": {
               "type": "string",
               "example": "食品Id"
             },
@@ -1438,7 +1466,7 @@
           "items": {
             "type": "object",
             "properties": {
-              "_id": {
+              "id": {
                 "type": "string",
                 "example": "自訂食品Id"
               },
@@ -1536,13 +1564,17 @@
                 "type": "string",
                 "example": "份量"
               },
+              "type": {
+                "type": "string",
+                "example": "食品類型"
+              },
+              "foodId": {
+                "type": "string",
+                "example": "食品Id"
+              },
               "food": {
                 "type": "object",
                 "properties": {
-                  "_id": {
-                    "type": "string",
-                    "example": "食品Id"
-                  },
                   "name": {
                     "type": "string",
                     "example": "食品名稱"

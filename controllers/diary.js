@@ -8,49 +8,92 @@ const apiState = require('../service/apiState');
 
 const mealType = ['breakfast', 'lunch', 'dinner', 'dessert'];
 
-// 取得營養日記列表 API
-exports.getDiarys = catchAsync(async(req, res, next) => {
-  const entry_date = req.query.entry_date;
-  const userId = req.userId;
-
+const getRangeDate = (entry_date) => {
   const date = entry_date ? new Date(entry_date) : new Date();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const startDate = new Date(new Date(`${year}-${month}-1`).setHours(00, 00, 00));
   const endDate = new Date(new Date(`${year}-${month}-31`).setHours(23, 59, 59));
+  return { startDate, endDate };
+}
 
-  const data = await Diary.aggregate([
+// 取得營養日記列表 API
+//!TODO: 食品已被刪除話
+exports.getDiarys = catchAsync(async(req, res, next) => {
+  const entry_date = req.query.entry_date;
+  const userId = req.userId;
+
+  const { startDate, endDate }  = getRangeDate(entry_date);
+  const createdAt =  { $gte: startDate, $lt: endDate };
+
+  let data = await Diary.aggregate([
     { 
-      $match: { 
-        user : userId,
-        createdAt: { $gte: startDate, $lt: endDate }
-      }
+      $match: { user : userId, createdAt }
     },
     {
       $sort: { createdAt: -1 }
     },
     {
+      $lookup: {
+        from: 'foods',
+        localField: 'food',
+        foreignField: '_id',
+        as: 'food_doc'
+      }
+    },
+    { 
+      $lookup: {
+        from: 'customfoods',
+        localField: 'customFood',
+        foreignField: '_id',
+        as: 'customFood_doc'
+      }
+    },
+    {
+      $unwind: { path: '$food_doc', preserveNullAndEmptyArrays: true } 
+    },
+    { 
+      $unwind: { path: '$customFood_doc', preserveNullAndEmptyArrays: true } 
+    },
+    {
       $group: { 
         _id: { 
-          diaryId: "$_id", meal: '$meal', food: '$food', quantity: '$quantity', 
+          diaryId: "$_id", meal: '$meal', quantity: '$quantity', type: '$type',
+          food_id: '$food', custom_food_id: '$customFood', food_doc: '$food_doc', customFood_doc: '$customFood_doc.food',
           date: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } } 
         }
       }
     },
     { 
-      $project: { _id: 0, diaryId: '$_id.diaryId', date: '$_id.date', meal: '$_id.meal', quantity: '$_id.quantity', food: '$_id.food' } 
-    },
-    { 
-      $unset: ['food._id']
+      $project: { 
+        _id: 0, diaryId: '$_id.diaryId', date: '$_id.date', meal: '$_id.meal', quantity: '$_id.quantity', type: '$_id.type',
+        food_id: '$_id.food_id', custom_food_id: '$_id.custom_food_id',food_doc: '$_id.food_doc', customFood_doc: '$_id.customFood_doc'
+      } 
     }
   ]);
+
+  data.forEach((item) => {
+    if (item.type=='food') {
+      item.food = item.food_doc;
+      item.foodId = item.food_id;
+      delete item.food_doc;
+    } else {
+      item.food = item.customFood_doc;
+      item.foodId = item.custom_food_id;
+    }
+    delete item.food_id;
+    delete item.custom_food_id;
+    delete item.food_doc;
+    delete item.customFood_doc;
+  });
 
   appSuccess({res, data, message: '取得今月營養日記列表成功'});
 });
 
 // 新增一則營養日記 API
+//!TODO: 新增日期
 exports.createOneDiary = catchAsync(async(req, res, next) => {
-  const { quantity, meal, isCustom } = req.body;
+  const { quantity, meal, type } = req.body;
   const foodId = req.params.foodId;
   const userId = req.userId;
   // 資料欄位正確
@@ -61,22 +104,29 @@ exports.createOneDiary = catchAsync(async(req, res, next) => {
   if (!mealType.includes(meal)) {
     return appError({statusCode: 400, message:'餐別類型未填寫正確(breakfast、lunch、dinner、dessert)'}, next);
   };
+  // 食品類型正確
+  if (type !== 'food' && type !== 'customFood') {
+    return appError({statusCode: 400, message:'食品類型未填寫正確'}, next);
+  };
   // 檢查是否自訂食品
-  let foodData, customFoodData;
-  if (!isCustom) {
-    foodData = await Food.findById(foodId).exec();
-    if (!foodData) return appError({statusCode: 400, message:'食品資料不存在'}, next);
+  let food_data;
+  if (type=='food') {
+    food_data = await Food.findById(foodId).exec();
+    if (!food_data) return appError({statusCode: 400, message:'食品資料不存在'}, next);
   } else {
-    customFoodData = await CustomFood.findById(foodId).exec();
-    if (!customFoodData) return appError({statusCode: 400, message:'自訂食品資料不存在'}, next);
-    customFoodData = customFoodData.food;
+    food_data = await CustomFood.findById(foodId).exec();
+    if (!food_data) return appError({statusCode: 400, message:'自訂食品資料不存在'}, next);
+    food_data = food_data.food;
   };
   const paramData = {
     meal,
     user: userId,
     quantity,
-    food:  foodData ? foodData : customFoodData
+    type
   };
+  foodType = type=='food' ? 'food' : 'customFood'
+  paramData[foodType] = foodId;
+
   const data = await Diary.create(paramData);
   newData = { newDiaryId: data._id };
 
