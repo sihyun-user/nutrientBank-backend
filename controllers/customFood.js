@@ -23,11 +23,13 @@ exports.getAllCustomFood = catchAsync(async (req, res, next) => {
   .skip((page - 1) * limit).exec();
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
-  let newData = data.map(item => {
+  let list = data.map(item => {
     return { ...item.food, id: item.id }
   });
 
-  appSuccess({ res, data: newData ,message: '取得自訂食品列表' });
+  const count = await CustomFood.find(keyword).count().exec();
+
+  appSuccess({ res, data: { count, list } ,message: '取得自訂食品列表' });
 });
 
 // 新增自訂食品 API
