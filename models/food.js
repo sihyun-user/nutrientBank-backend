@@ -37,6 +37,11 @@ const foodSchema = new mongoose.Schema(
       sugar: 0,
       required: [true, '食品營養成分未填寫正確']
     },
+    type: {
+      type: String,
+      default: 'food',
+      required: [true, '食品類型未填寫正確']
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

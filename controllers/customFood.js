@@ -33,7 +33,7 @@ exports.getAllCustomFood = catchAsync(async (req, res, next) => {
 // 新增自訂食品 API
 exports.createCustomFood = catchAsync(async (req, res, next) => {
   const { name, subName, brand, perUnitWeight, unit, nutrition } = req.body;
-  const paramData = { name, subName, brand, perUnitWeight, unit, nutrition };
+  const paramData = { name, subName, brand, perUnitWeight, unit, nutrition, type:'customFood' };
   const userId = req.userId;
 
   appHelper.verifyFood(paramData, next);
@@ -50,7 +50,7 @@ exports.createCustomFood = catchAsync(async (req, res, next) => {
 // 編輯自訂食品 API
 exports.updateCustomFood = catchAsync(async (req, res, next) => {
   let { name, subName, brand, perUnitWeight, unit, nutrition } = req.body;
-  const paramData = { name, subName, brand, perUnitWeight, unit, nutrition };
+  const paramData = { name, subName, brand, perUnitWeight, unit, nutrition, type:'customFood' };
   const userId = req.userId;
   const customFoodId = req.params.customFoodId;
 

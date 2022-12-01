@@ -43,9 +43,8 @@ exports.generateSendJWT = (user, res) => {
   return token;
 };
 
-// TODO 驗證
 exports.verifyFood = (data, next) => {
-  let { name, subName, brand, perUnitWeight, unit, nutrition } = data;
+  let { name, subName, brand, perUnitWeight, unit, nutrition, type } = data;
   let ingredientType = ['calories','carbohydrates', 'protein', 'fat', 'saturated_fat', 'trans_fat', 'sodium', 'sugar'];
   const unitType = ['克','毫升'];
   // 食品名稱欄位正確
@@ -96,5 +95,15 @@ exports.verifyFood = (data, next) => {
   const checkAllKeys = ingredientType.every((type) => nutrition.hasOwnProperty(type));
   if (!checkAllKeys) {
     return appError({statusCode: 400, message:`食品營養成分欄位未填寫正確`}, next);
+  }
+  // 食品營養成分四捨五入取小數點後一位
+  for(let key in nutrition) {
+    let value = +nutrition[key]
+    nutrition[key] = +value.toFixed(1);
+  };
+  console.log(type)
+  // 食品類型正確
+  if (type!=='food'&&type!=='customFood') {
+    return appError({statusCode: 400, message:`食品類型未填寫正確`}, next);
   }
 };
