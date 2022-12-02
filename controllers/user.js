@@ -90,12 +90,7 @@ exports.login = catchAsync(async(req, res, next) => {
 // 取得會員資料 API
 exports.getProfile = catchAsync(async(req, res, next) => {
   const userId = req.userId;
-  const data = await User.findById(userId)
-  .select('-_id -isAdmin')
-  .populate({
-    path: 'likes',
-    select: '-_id'
-  }).exec();
+  let data = await User.findById(userId).select('-_id -food_likes -customFood_likes');
 
   appSuccess({ res, data, message: '取得會員資料成功' });
 });

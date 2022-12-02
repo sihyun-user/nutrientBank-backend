@@ -137,36 +137,4 @@ router
     foodController.deleteOneFood
   );
 
-router
-  .post('/food/:foodId/like', isAuth,
-    /*
-      #swagger.tags = ['Food - 食品']
-      #swagger.description = '新增食品書籤 API'
-      #swagger.security = [{'api_key': ['apiKeyAuth']}]
-      #swagger.responses[200] = { 
-        description: '食品書籤資訊',
-        schema: { 
-          status: true,
-          message: '新增食品書籤成功'
-        }
-      }
-    */
-      foodController.addFoodLike
-  )
-  .post('/food/:foodId/unlike', isAuth,
-    /*
-      #swagger.tags = ['Food - 食品']
-      #swagger.description = '取消食品書籤 API'
-      #swagger.security = [{'api_key': ['apiKeyAuth']}]
-      #swagger.responses[200] = { 
-        description: '食品書籤資訊',
-        schema: { 
-          status: true,
-          message: '取消食品書籤成功'
-        }
-      }
-    */
-    foodController.cancelFoodLike
-  );
-
 module.exports = router;

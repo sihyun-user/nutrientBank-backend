@@ -55,19 +55,9 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
     { 
       $unwind: { path: '$customFood_doc', preserveNullAndEmptyArrays: true } 
     },
-    {
-      $group: { 
-        _id: { 
-          diaryId: "$_id", meal: '$meal', quantity: '$quantity', type: '$type',
-          food_id: '$food', custom_food_id: '$customFood', food_doc: '$food_doc', customFood_doc: '$customFood_doc.food',
-          date: { $dateToString: { format: '%Y-%m-%d', date: '$createdAt' } } 
-        }
-      }
-    },
     { 
       $project: { 
-        _id: 0, diaryId: '$_id.diaryId', date: '$_id.date', meal: '$_id.meal', quantity: '$_id.quantity', type: '$_id.type',
-        food_id: '$_id.food_id', custom_food_id: '$_id.custom_food_id',food_doc: '$_id.food_doc', customFood_doc: '$_id.customFood_doc'
+        _id: 0, diaryId: '$_id', date: 1, meal: 1, quantity: 1, type: 1, food_doc: 1, customFood_doc: 1
       } 
     }
   ]);
@@ -75,16 +65,14 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
   data.forEach((item) => {
     if (item.type=='food') {
       item.food = item.food_doc;
-      item.foodId = item.food_id;
+      item.food.id = item.food._id;
       delete item.food_doc;
+      delete item.food._id;
     } else {
-      item.food = item.customFood_doc;
-      item.foodId = item.custom_food_id;
+      item.food = item.customFood_doc.food;
+      item.food.id = item.customFood_doc._id;
+      delete item.customFood_doc;
     }
-    delete item.food_id;
-    delete item.custom_food_id;
-    delete item.food_doc;
-    delete item.customFood_doc;
   });
 
   appSuccess({res, data, message: '取得今月營養日記列表成功'});

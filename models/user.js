@@ -30,9 +30,6 @@ const userSchema = new mongoose.Schema(
       minlength: 8,
       select: false
     },
-    likes: [
-      { type: mongoose.Schema.ObjectId, ref: 'Food' }
-    ],
     isAdmin: {
       type: Boolean,
       default: false

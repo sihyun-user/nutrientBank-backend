@@ -42,6 +42,12 @@ const foodSchema = new mongoose.Schema(
       default: 'food',
       required: [true, '食品類型未填寫正確']
     },
+    likes: [
+      { 
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
+    ],
     createdAt: {
       type: Date,
       default: Date.now(),

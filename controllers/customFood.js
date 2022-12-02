@@ -24,10 +24,10 @@ exports.getAllCustomFood = catchAsync(async (req, res, next) => {
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
   let list = data.map(item => {
-    return { ...item.food, id: item.id }
+    return { ...item.food, id: item.id, likes: item.likes }
   });
 
-  const count = await CustomFood.find(keyword).count().exec();
+  const count = await CustomFood.find({ user: userId , ...keyword }).count().exec();
 
   appSuccess({ res, data: { count, list } ,message: '取得自訂食品列表' });
 });

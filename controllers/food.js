@@ -1,5 +1,4 @@
 const Food = require('../models/food');
-const User = require('../models/user');
 const appSuccess = require('../service/appSuccess');
 const appError = require('../service/appError');
 const catchAsync = require('../service/catchAsync');
@@ -70,39 +69,4 @@ exports.deleteOneFood = catchAsync(async (req, res, next) => {
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
   appSuccess({ res, message: '刪除一筆食品成功' });
-});
-
-// 新增食品書籤 API
-exports.addFoodLike = catchAsync(async (req, res, next) => {
-  const userId = req.userId;
-  const foodId = req.params.foodId;
-
-  const data = await Food.findById(foodId).exec();
-  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
-  
-  await User.updateOne(
-    { 
-      '_id': userId,
-      'likes': { $ne: foodId }
-    },
-    { $addToSet: { likes: foodId } }
-  );
-
-  appSuccess({ res, message: '新增食品書籤成功' });
-});
-
-// 取消食品書籤 API
-exports.cancelFoodLike = catchAsync(async (req, res, next) => {
-  const userId = req.userId;
-  const foodId = req.params.foodId;
-
-  const data = await Food.findById(foodId).exec();
-  if (!data) return appError(apiState.DATA_NOT_FOUND, next);
-
-  await User.updateOne(
-    { '_id': userId },
-    { $pull: { likes: foodId } }
-  );
-
-  appSuccess({ res, message: '取消食品書籤成功' });
 });

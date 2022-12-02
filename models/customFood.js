@@ -4,8 +4,7 @@ const customFood = new mongoose.Schema(
   {
     user: {
       type: mongoose.Schema.ObjectId,
-      ref: 'User',
-      required: [true, '用戶Id未填寫正確']
+      ref: 'User'
     },
     food: {
       name: {
@@ -53,7 +52,18 @@ const customFood = new mongoose.Schema(
         default: Date.now(),
         select: false
       }
-    }
+    },
+    type: {
+      type: String,
+      default: 'customFood',
+      required: [true, '食品類型未填寫正確']
+    },
+    likes: [
+      { 
+        type: mongoose.Schema.ObjectId,
+        ref: 'User'
+      }
+    ],
   },
   {
     versionKey: false
