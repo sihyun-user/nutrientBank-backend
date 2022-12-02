@@ -5,15 +5,14 @@ const appSuccess = require('../service/appSuccess');
 const appError = require('../service/appError');
 const catchAsync = require('../service/catchAsync');
 const apiState = require('../service/apiState');
+const moment = require('moment');
 
 const mealType = ['breakfast', 'lunch', 'dinner', 'dessert'];
 
 const getRangeDate = (entry_date) => {
-  const date = entry_date ? new Date(entry_date) : new Date();
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const startDate = new Date(new Date(`${year}-${month}-1`).setHours(00, 00, 00));
-  const endDate = new Date(new Date(`${year}-${month}-31`).setHours(23, 59, 59));
+  const date = entry_date ? moment(entry_date) : moment();
+  const startDate = new Date(date.utc().startOf('month').format());
+  const endDate = new Date(date.utc().endOf('month').format());
   return { startDate, endDate };
 }
 
@@ -57,7 +56,8 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
     },
     { 
       $project: { 
-        _id: 0, diaryId: '$_id', date: 1, meal: 1, quantity: 1, type: 1, food_doc: 1, customFood_doc: 1
+        _id: 0, diaryId: '$_id', date: 1, meal: 1, quantity: 1, type: 1, food_doc: 1, customFood_doc: 1,
+        date: '$createdAt'
       } 
     }
   ]);
@@ -73,6 +73,7 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
       item.food.id = item.customFood_doc._id;
       delete item.customFood_doc;
     }
+    item.date = moment(item.date).format('YYYY-MM-DD')
   });
 
   appSuccess({res, data, message: '取得今月營養日記列表成功'});

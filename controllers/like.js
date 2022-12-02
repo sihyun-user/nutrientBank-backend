@@ -8,57 +8,46 @@ const catchAsync = require('../service/catchAsync');
 // 取得食品書籤列表 API
 exports.getAllLike = catchAsync(async (req, res, next) => {
   const userId = req.userId;
-  // let data = await User.aggregate([
-  //   { 
-  //     $match: { _id : userId }
-  //   },
-  //   {
-  //     $lookup: {
-  //       from: 'foods',
-  //       localField: 'food_likes',
-  //       foreignField: '_id',
-  //       as: 'food_likes'
-  //     }
-  //   },
-  //   { 
-  //     $lookup: {
-  //       from: 'customfoods',
-  //       localField: 'customFood_likes',
-  //       foreignField: '_id',
-  //       as: 'customFood_likes'
-  //     }
-  //   },
-  //   { 
-  //     $project: { 
-  //       _id: 0, customFood_likes: 1, food_likes: 1
-  //     } 
-  //   }
-  // ]);
-  
-  // let newData = data[0];
-  // let new_food_likes = newData.food_likes.map(item => {
-  //   item.id = item._id, delete item._id;
-  //   return item;
-  // });
-  // let new_customFood_likes = newData.customFood_likes.map(item => {
-  //   return {...item.food, id: item._id }
-  // });
-  // newData.food_likes = new_food_likes;
-  // newData.customFood_likes = new_customFood_likes;
-  let food_likes = await Food.find({
-    likes: { $in: [userId] }
-  }).select('-likes').exec();
+  const search = req.query.search;
 
-  let customFood_likes = await CustomFood.find({
-    likes: { $in: [userId] }
-  }).exec();
-  let new_customFood_likes = customFood_likes.map(item => {
-    return {...item.food, id: item._id }
+  const newSearch = search !== undefined ? search.trim() : '';
+  const keyword = search !== undefined ? { 
+    $or: [
+      { name: new RegExp(newSearch) }, 
+      { subName: new RegExp(newSearch) }
+    ]
+  } : {};
+  const likes = { likes: { $in: [userId] } };
+  const payload = { ...keyword, ...likes };
+
+  const customFood_list = await CustomFood.find(payload)
+  const customFood_count = customFood_list.length;
+  const new_customFood_list = customFood_list.map(item => {
+    return {...item.food, likes: item.likes, id: item._id }
   });
 
-  let data = { food_likes, customFood_likes: new_customFood_likes };
+  const food_list = await Food.find(payload)
+  const food_count = food_list.length;
+
+  const data = { 
+    count: food_count + customFood_count,
+    list: [...new_customFood_list, ...food_list]
+  };
 
   appSuccess({ res, data, message: '取得食品書籤列表' });
+});
+
+// 取得一筆食品書籤 API
+exports.getOneLike = catchAsync(async (req, res, next) => {
+  const foodId = req.params.foodId;
+  const type = req.query.type;
+
+  let modelType = type=='food' ? Food : CustomFood;
+  let foodType = type=='food' ? '食品' : '自訂食品';
+  const data = await modelType.findById(foodId).exec();
+  if (!data) return appError({statusCode: 400, message:`${foodType}資料不存在`}, next);
+
+  appSuccess({ res, data, message: '取得一筆食品書籤成功' });
 });
 
 // 新增食品書籤 API
@@ -89,7 +78,7 @@ exports.cancelFoodLike = catchAsync(async (req, res, next) => {
   let modelType = type=='food' ? Food : CustomFood;
   let foodType = type=='food' ? '食品' : '自訂食品';
   const data = await modelType.findOneAndUpdate({ _id: foodId }, {
-    $addToSet: { likes: userId }
+    $pull: { likes: userId }
   },{new: true, runValidators: true}).exec();
   if (!data) return appError({statusCode: 400, message:`${foodType}資料不存在`}, next);
 

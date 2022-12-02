@@ -7,27 +7,25 @@ const appHelper = require('../service/appHelper');
 
 // 取得自訂食品列表 API
 exports.getAllCustomFood = catchAsync(async (req, res, next) => {
-  let { search, page = 1, limit = 10 } = req.query;
   const userId = req.userId;
+  const search = req.query.search;
 
-  let newSearch = search !== undefined ? search.trim() : '';
-  let keyword = search !== undefined ? {
+  const newSearch = search !== undefined ? search.trim() : '';
+  const keyword = search !== undefined ? {
     $or: [
       { "food.name": new RegExp(newSearch), }, 
       { "food.subName": new RegExp(newSearch) }
     ]
   } : {};
 
-  let data = await CustomFood.find({ user: userId , ...keyword })
-  .limit(limit)
-  .skip((page - 1) * limit).exec();
+  const data = await CustomFood.find({ user: userId , ...keyword }).exec();
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
-  let list = data.map(item => {
+  const list = data.map(item => {
     return { ...item.food, id: item.id, likes: item.likes }
   });
 
-  const count = await CustomFood.find({ user: userId , ...keyword }).count().exec();
+  const count = list.length;
 
   appSuccess({ res, data: { count, list } ,message: '取得自訂食品列表' });
 });

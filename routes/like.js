@@ -19,6 +19,9 @@ router
     */
     likeController.getAllLike
   )
+  .get('/like/:foodId', isAuth,
+    likeController.getOneLike
+  )
   .post('/like/:foodId', isAuth,
     /*
       #swagger.tags = ['Like - 書籤']
