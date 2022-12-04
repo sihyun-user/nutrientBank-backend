@@ -18,11 +18,27 @@ const userSchema = new mongoose.Schema(
     },
     sex: {
       type: Number,
-      enum: {
-        values: [0, 1],
-        message: '性別未填寫正確(男 1、女 0)',
-      },
+      enum: [0, 1],
+      required: [true, '性別未填寫正確(男 1、女 0)'],
       default: 1
+    },
+    height: {
+      type: Number,
+      default: 0
+    },
+    weight: {
+      type: Number,
+      default: 0
+    },
+    sportType: {
+      type: String,
+      euum: ['underSport', 'normalSport', 'moderateSport', 'severeSport', 'overSport'],
+      default: 'underSport'
+    },
+    fitnessType: {
+      type: String,
+      euum: ['loseFat', 'gentleLoseFat', 'keepWeight', 'gentleAddFat', 'addFat'],
+      default: 'keepWeight'
     },
     password: {
       type: String,
