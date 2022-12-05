@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema(
     sex: {
       type: Number,
       enum: [0, 1],
-      required: [true, '性別未填寫正確(男 1、女 0)'],
+      required: [true, '性別未填寫正確'],
       default: 1
     },
     birthday: {

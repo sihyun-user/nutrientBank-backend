@@ -115,19 +115,19 @@ exports.updateProfile = catchAsync(async(req, res, next) => {
     return appError({statusCode: 400, message:'暱稱低於2個字元'}, next);
   };
   // 性別正確
-  if (sex!==0&&sex!== 1) {
+  if (sex != 0 && sex != 1) {
     return appError({statusCode: 400, message:'性別未填寫正確(男 1、女 0)'}, next);
   };
   // 生日正確
-  if (birthday!==moment(birthday).format('YYYY-MM-DD')) {
+  if (birthday !== moment(birthday).format('YYYY-MM-DD')) {
     return appError({statusCode: 400, message:'生日未填寫正確'}, next);
   };
   // 身高正確
-  if (height<=0||!Number(height)) {
+  if (height <= 0) {
     return appError({statusCode: 400, message:'身高未填寫正確'}, next);
   }
   // 體重正確
-  if (weight<=0||!Number(weight)) {
+  if (weight <= 0) {
     return appError({statusCode: 400, message:'體重未填寫正確'}, next);
   }
   // 運動量

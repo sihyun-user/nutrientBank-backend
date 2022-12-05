@@ -99,7 +99,7 @@ exports.createOneDiary = catchAsync(async(req, res, next) => {
   };
   // 檢查是否自訂食品
   let food_data;
-  if (type=='food') {
+  if (type == 'food') {
     food_data = await Food.findById(foodId).exec();
     if (!food_data) return appError({statusCode: 400, message:'食品資料不存在'}, next);
   } else {
@@ -113,7 +113,7 @@ exports.createOneDiary = catchAsync(async(req, res, next) => {
     quantity,
     type
   };
-  foodType = type=='food' ? 'food' : 'customFood'
+  foodType = type == 'food' ? 'food' : 'customFood'
   paramData[foodType] = foodId;
 
   const data = await Diary.create(paramData);

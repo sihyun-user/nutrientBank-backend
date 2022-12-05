@@ -46,9 +46,13 @@ const handleError = (err, req, res, next) => {
   if (err.name === 'ValidationError') {
     setError(apiState.DATA_MISSING, err);
   };
-  
-  if (err.name === 'CastError') {
+
+  if (err.name === 'CastError' && err.kind === 'ObjectId') {
     setError(apiState.ID_ERROR, err);
+  };
+
+  if (err.name === 'CastError') {
+    setError(apiState.CastError_ERROR, err);
   };
   
   idDev ? resErrorDev(err, res) : resErrorProd(err, res);
