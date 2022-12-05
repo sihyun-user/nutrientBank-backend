@@ -89,10 +89,10 @@ router
     userController.updateProfile  
   );
 
-router.post('/user/updatePassword', isAuth,
+router.patch('/user/updatePassword', isAuth,
   /*
     #swagger.tags = ['User - 會員']
-    #swagger.description = '編輯密碼 API'
+    #swagger.description = '編輯會員密碼 API'
     #swagger.security = [{'api_key': ['apiKeyAuth']}]
     #swagger.parameters['body'] = {
       in: 'body',
@@ -105,10 +105,10 @@ router.post('/user/updatePassword', isAuth,
       }
     }
     #swagger.responses[200] = { 
-      description: '編輯密碼資訊',
+      description: '編輯會員密碼資訊',
       schema: { 
         status: true,
-        message: '編輯密碼成功'
+        message: '編輯會員密碼成功'
       }
     }
   */

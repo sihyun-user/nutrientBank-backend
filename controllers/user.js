@@ -148,7 +148,7 @@ exports.updateProfile = catchAsync(async(req, res, next) => {
   appSuccess({ res, data, message: '編輯會員資料成功' });
 });
 
-// 編輯密碼 API
+// 編輯會員密碼 API
 exports.updatePassword = catchAsync(async(req, res, next) => {
   let { password,  confirmPassword } = req.body;
   const userId = req.userId;
@@ -168,5 +168,5 @@ exports.updatePassword = catchAsync(async(req, res, next) => {
   password = await bcrypt.hash(password, 12);
   await User.findByIdAndUpdate(userId, {password}).exec();
 
-  appSuccess({ res, message: '編輯密碼成功' });
+  appSuccess({ res, message: '編輯會員密碼成功' });
 });
