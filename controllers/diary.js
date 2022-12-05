@@ -17,7 +17,7 @@ const getRangeDate = (entry_date) => {
 }
 
 // 取得營養日記列表 API
-//!TODO: 食品已被刪除話
+//TODO: 食品已被刪除後續
 exports.getDiarys = catchAsync(async(req, res, next) => {
   const entry_date = req.query.entry_date;
   const userId = req.userId;
@@ -80,9 +80,9 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
 });
 
 // 新增一則營養日記 API
-//!TODO: 新增日期
+//TODO 設定日期的時間
 exports.createOneDiary = catchAsync(async(req, res, next) => {
-  const { quantity, meal, type } = req.body;
+  const { quantity, meal, type, dateTime } = req.body;
   const foodId = req.params.foodId;
   const userId = req.userId;
   // 資料欄位正確
@@ -118,6 +118,10 @@ exports.createOneDiary = catchAsync(async(req, res, next) => {
 
   const data = await Diary.create(paramData);
   newData = { newDiaryId: data._id };
+
+  if (dateTime) {
+    await Diary.findByIdAndUpdate(data._id, { createdAt: new Date(dateTime) });
+  }
 
   appSuccess({res, data: newData, message: '新增一則營養日記成功'});
 });

@@ -22,6 +22,10 @@ const userSchema = new mongoose.Schema(
       required: [true, '性別未填寫正確(男 1、女 0)'],
       default: 1
     },
+    birthday: {
+      type: String,
+      default: '2000-01-01'
+    },
     height: {
       type: Number,
       default: 0
@@ -32,12 +36,12 @@ const userSchema = new mongoose.Schema(
     },
     sportType: {
       type: String,
-      euum: ['underSport', 'normalSport', 'moderateSport', 'severeSport', 'overSport'],
+      enum: ['underSport', 'normalSport', 'moderateSport', 'severeSport', 'overSport'],
       default: 'underSport'
     },
     fitnessType: {
       type: String,
-      euum: ['loseFat', 'gentleLoseFat', 'keepWeight', 'gentleAddFat', 'addFat'],
+      enum: ['loseFat', 'gentleLoseFat', 'keepWeight', 'gentleAddFat', 'addFat'],
       default: 'keepWeight'
     },
     password: {
