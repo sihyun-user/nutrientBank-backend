@@ -17,10 +17,10 @@ const userSchema = new mongoose.Schema(
       default: ''
     },
     sex: {
-      type: Number,
-      enum: [0, 1],
+      type: String,
+      enum: ['0', '1'],
       required: [true, '性別未填寫正確'],
-      default: 1
+      default: '1'
     },
     birthday: {
       type: String,

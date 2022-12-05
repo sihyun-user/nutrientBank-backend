@@ -115,8 +115,8 @@ exports.updateProfile = catchAsync(async(req, res, next) => {
     return appError({statusCode: 400, message:'暱稱低於2個字元'}, next);
   };
   // 性別正確
-  if (sex != 0 && sex != 1) {
-    return appError({statusCode: 400, message:'性別未填寫正確(男 1、女 0)'}, next);
+  if (sex !== '0' && sex !== '1') {
+    return appError({statusCode: 400, message:'性別未填寫正確'}, next);
   };
   // 生日正確
   if (birthday !== moment(birthday).format('YYYY-MM-DD')) {
