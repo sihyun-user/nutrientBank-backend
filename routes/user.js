@@ -89,7 +89,7 @@ router
     userController.updateProfile  
   );
 
-router.patch('/user/updatePassword', isAuth,
+router.patch('/user/password', isAuth,
   /*
     #swagger.tags = ['User - 會員']
     #swagger.description = '編輯會員密碼 API'
