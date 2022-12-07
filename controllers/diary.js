@@ -25,7 +25,7 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
   const { startDate, endDate }  = getRangeDate(entry_date);
   const createdAt =  { $gte: startDate, $lt: endDate };
 
-  let data = await Diary.aggregate([
+  const data = await Diary.aggregate([
     { 
       $match: { user : userId, createdAt }
     },
@@ -62,7 +62,8 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
     }
   ]);
 
-  data.forEach((item) => {
+  const newData = data.filter(item => {
+    if (!item.food_doc && !item.customFood_doc) return false
     if (item.type=='food') {
       item.food = item.food_doc;
       item.food.id = item.food._id;
@@ -74,9 +75,10 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
       delete item.customFood_doc;
     }
     item.date = moment(item.date).format('YYYY-MM-DD')
+    return item
   });
 
-  appSuccess({res, data, message: '取得今月營養日記列表成功'});
+  appSuccess({res, data: newData , message: '取得今月營養日記列表成功'});
 });
 
 // 新增一則營養日記 API

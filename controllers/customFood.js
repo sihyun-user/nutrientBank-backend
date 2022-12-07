@@ -59,10 +59,10 @@ exports.updateCustomFood = catchAsync(async (req, res, next) => {
   const data = await CustomFood.findOneAndUpdate({
     _id: customFoodId,
     user: userId
-  }, { food: paramData }, {new: true, runValidators: true}).exec();
+  }).exec();
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
-  appSuccess({ res, data, message: '編輯一筆自訂食品成功' })
+  appSuccess({ res, message: '編輯一筆自訂食品成功' })
 });
 
 // 刪除自訂食品 API

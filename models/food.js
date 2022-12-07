@@ -21,8 +21,8 @@ const foodSchema = new mongoose.Schema(
     },
     unit: {
       type: String,
-      default: '克',
-      enum: ['克', '毫升'],
+      default: 'g',
+      enum: ['g', 'ml'],
       required: [true, '食品重含量單位未填寫正確']
     },
     nutrition: {

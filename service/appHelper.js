@@ -46,7 +46,7 @@ exports.generateSendJWT = (user, res) => {
 exports.verifyFood = (data, next) => {
   let { name, subName, brand, perUnitWeight, unit, nutrition, type } = data;
   let ingredientType = ['calories','carbohydrates', 'protein', 'fat', 'saturated_fat', 'trans_fat', 'sodium', 'sugar'];
-  const unitType = ['克','毫升'];
+  const unitType = ['g','ml'];
   // 食品名稱欄位正確
   if (!name) {
     return appError({statusCode: 400, message:'食品名稱為必填欄位'}, next);
@@ -89,7 +89,7 @@ exports.verifyFood = (data, next) => {
   };
   // 食品重含量單位驗證
   if (!unitType.includes(unit.trim())) {
-    return appError({statusCode: 400, message:'食品重含量單位未填寫正確(克、毫升)'}, next);
+    return appError({statusCode: 400, message:'食品重含量單位未填寫正確(g、ml)'}, next);
   };
   // 食品營養成分欄位正確
   const checkAllKeys = ingredientType.every((type) => nutrition.hasOwnProperty(type));
