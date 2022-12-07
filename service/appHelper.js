@@ -77,7 +77,7 @@ exports.verifyFood = (data, next) => {
   };
   // 食品每一份量含不為空白
   if (!perUnitWeight) {
-    return appError({statusCode: 400, message:'食品每一份量含為不為空白'}, next);
+    return appError({statusCode: 400, message:'食品每一份量含不為空白'}, next);
   };
   //食品每一份量含不為負值
   if (perUnitWeight < 0) {
@@ -101,7 +101,6 @@ exports.verifyFood = (data, next) => {
     let value = +nutrition[key]
     nutrition[key] = +value.toFixed(1);
   };
-  console.log(type)
   // 食品類型正確
   if (type!=='food'&&type!=='customFood') {
     return appError({statusCode: 400, message:`食品類型未填寫正確`}, next);
