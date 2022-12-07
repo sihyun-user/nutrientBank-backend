@@ -22,13 +22,13 @@ const customFood = new mongoose.Schema(
       perUnitWeight: {
         type: Number,
         default: 0,
-        required: [true, '食品重含量未填寫正確']
+        required: [true, '食品每一份量含未填寫正確']
       },
       unit: {
         type: String,
         default: 'g',
         enum: ['g', 'ml'],
-        required: [true, '食品重含量單位未填寫正確']
+        required: [true, '食品每一份量含單位未填寫正確']
       },
       nutrition: {
         type: Object,

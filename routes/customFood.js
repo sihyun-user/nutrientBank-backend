@@ -45,8 +45,8 @@ router
           $name: '食品名稱',
           subName: '食品英文名稱',
           brand: '食品品牌',
-          $perUnitWeight: '食品重含量',
-          $unit: '食品重含量單位',
+          $perUnitWeight: '食品每一份量含',
+          $unit: '食品每一份量含單位',
           $nutrition: {
             calories: '卡路里含量',
             carbohydrates: '碳水化合物含量',
@@ -86,8 +86,8 @@ router
           $name: '食品名稱',
           subName: '食品英文名稱',
           brand: '食品品牌',
-          $perUnitWeight: '食品重含量',
-          $unit: '食品重含量單位',
+          $perUnitWeight: '食品每一份量含',
+          $unit: '食品每一份量含單位',
           $nutrition: {
             calories: '卡路里含量',
             carbohydrates: '碳水化合物含量',

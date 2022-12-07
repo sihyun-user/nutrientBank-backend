@@ -75,21 +75,21 @@ exports.verifyFood = (data, next) => {
   if (brand && !validator.isLength(brand.trim(), {min:2})) {
     return appError({statusCode: 400, message:'食品品牌名稱低於2個字元'}, next);
   };
-  // 食品重含量欄位正確
+  // 食品每一份量含不為空白
   if (!perUnitWeight) {
-    return appError({statusCode: 400, message:'食品重含量必填欄位'}, next);
+    return appError({statusCode: 400, message:'食品每一份量含為不為空白'}, next);
   };
-  // 食品重含量不為負值
+  //食品每一份量含不為負值
   if (perUnitWeight < 0) {
-    return appError({statusCode: 400, message:'食品重含量未填寫正確'}, next);
+    return appError({statusCode: 400, message:'食品每一份量含未填寫正確'}, next);
   };
-  // 食品重含量單位欄位正確
+  // 食品每一份量含單位欄位正確
   if (!unit) {
-    return appError({statusCode: 400, message:'食品重含量單位必填欄位'}, next);
+    return appError({statusCode: 400, message:'食品每一份量含單位為必填欄位'}, next);
   };
-  // 食品重含量單位驗證
+  // 食品每一份量含單位驗證
   if (!unitType.includes(unit.trim())) {
-    return appError({statusCode: 400, message:'食品重含量單位未填寫正確(g、ml)'}, next);
+    return appError({statusCode: 400, message:'食品每一份量含單位未填寫正確(g、ml)'}, next);
   };
   // 食品營養成分欄位正確
   const checkAllKeys = ingredientType.every((type) => nutrition.hasOwnProperty(type));

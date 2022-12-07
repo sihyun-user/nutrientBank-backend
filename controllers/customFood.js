@@ -30,7 +30,7 @@ exports.getAllCustomFood = catchAsync(async (req, res, next) => {
   appSuccess({ res, data: { count, list } ,message: '取得自訂食品列表' });
 });
 
-// 新增自訂食品 API
+// 新增一筆自訂食品 API
 exports.createCustomFood = catchAsync(async (req, res, next) => {
   const { name, subName, brand, perUnitWeight, unit, nutrition } = req.body;
   const paramData = { name, subName, brand, perUnitWeight, unit, nutrition, type:'customFood' };
@@ -47,7 +47,7 @@ exports.createCustomFood = catchAsync(async (req, res, next) => {
   appSuccess({ res, data, message: '新增一筆自訂食品成功' });
 });
 
-// 編輯自訂食品 API
+// 編輯一筆自訂食品 API
 exports.updateCustomFood = catchAsync(async (req, res, next) => {
   let { name, subName, brand, perUnitWeight, unit, nutrition } = req.body;
   const paramData = { name, subName, brand, perUnitWeight, unit, nutrition, type:'customFood' };
@@ -59,13 +59,13 @@ exports.updateCustomFood = catchAsync(async (req, res, next) => {
   const data = await CustomFood.findOneAndUpdate({
     _id: customFoodId,
     user: userId
-  }).exec();
+  }, { food: paramData }, {new: true, runValidators: true}).exec();
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
   appSuccess({ res, message: '編輯一筆自訂食品成功' })
 });
 
-// 刪除自訂食品 API
+// 刪除一筆自訂食品 API
 exports.deleteCustomFood = catchAsync(async (req, res, next) => {
   const customFoodId = req.params.customFoodId;
   const userId = req.userId;

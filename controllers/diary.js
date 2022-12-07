@@ -17,7 +17,6 @@ const getRangeDate = (entry_date) => {
 }
 
 // 取得營養日記列表 API
-//TODO: 食品已被刪除後續
 exports.getDiarys = catchAsync(async(req, res, next) => {
   const entry_date = req.query.entry_date;
   const userId = req.userId;
@@ -82,7 +81,6 @@ exports.getDiarys = catchAsync(async(req, res, next) => {
 });
 
 // 新增一則營養日記 API
-//TODO 設定日期的時間
 exports.createOneDiary = catchAsync(async(req, res, next) => {
   const { quantity, meal, type, dateTime } = req.body;
   const foodId = req.params.foodId;
