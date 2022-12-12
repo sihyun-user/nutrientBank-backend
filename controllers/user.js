@@ -79,9 +79,9 @@ exports.login = catchAsync(async(req, res, next) => {
   };
   const token = appHelper.generateSendJWT(user, res);
 
-  const { name, id, photo, sex } = user;
+  const { id, isAdmin } = user;
   let data = {
-    user : { name, email, id, photo, sex },
+    user : { id, isAdmin },
     token
   };
   
@@ -91,7 +91,7 @@ exports.login = catchAsync(async(req, res, next) => {
 // 取得會員資料 API
 exports.getProfile = catchAsync(async(req, res, next) => {
   const userId = req.userId;
-  let data = await User.findById(userId).select('-_id');
+  let data = await User.findById(userId).select('-_id -isAdmin');
 
   appSuccess({ res, data, message: '取得會員資料成功' });
 });
@@ -103,7 +103,7 @@ exports.updateProfile = catchAsync(async(req, res, next) => {
   const sportEnum = ['underSport', 'normalSport', 'moderateSport', 'severeSport', 'overSport'];
   const fitnessEnum = ['loseFat', 'gentleLoseFat', 'keepWeight', 'gentleAddFat', 'addFat'];
   // 資料欄位正確
-  if (!name || !sex || !birthday || !height || !weight || !sportType || !fitnessType || !photo) {
+  if (!name || !sex || !birthday || !height || !weight || !sportType || !fitnessType) {
     return appError(apiState.DATA_MISSING, next);
   };
   // 暱稱不為空
