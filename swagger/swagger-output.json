@@ -165,12 +165,12 @@
         ]
       }
     },
-    "/api/user/updatePassword": {
-      "post": {
+    "/api/user/password": {
+      "patch": {
         "tags": [
           "User - 會員"
         ],
-        "description": "編輯密碼 API",
+        "description": "編輯會員密碼 API",
         "parameters": [
           {
             "name": "body",
@@ -198,7 +198,7 @@
         ],
         "responses": {
           "200": {
-            "description": "編輯密碼資訊",
+            "description": "編輯會員密碼資訊",
             "schema": {
               "type": "object",
               "properties": {
@@ -208,7 +208,7 @@
                 },
                 "message": {
                   "type": "string",
-                  "example": "編輯密碼成功"
+                  "example": "編輯會員密碼成功"
                 }
               },
               "xml": {
@@ -319,11 +319,11 @@
                 },
                 "perUnitWeight": {
                   "type": "string",
-                  "example": "食品重含量"
+                  "example": "食品每一份量含"
                 },
                 "unit": {
                   "type": "string",
-                  "example": "食品重含量單位"
+                  "example": "食品每一份量含單位"
                 },
                 "nutrition": {
                   "type": "object",
@@ -473,11 +473,11 @@
                 },
                 "perUnitWeight": {
                   "type": "string",
-                  "example": "食品重含量"
+                  "example": "食品每一份量含"
                 },
                 "unit": {
                   "type": "string",
-                  "example": "食品重含量單位"
+                  "example": "食品每一份量含單位"
                 },
                 "nutrition": {
                   "type": "object",
@@ -548,94 +548,6 @@
                       "example": "食品Id"
                     }
                   }
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": [
-              "apiKeyAuth"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/food/{foodId}/like": {
-      "post": {
-        "tags": [
-          "Food - 食品"
-        ],
-        "description": "新增食品書籤 API",
-        "parameters": [
-          {
-            "name": "foodId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "食品書籤資訊",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "新增食品書籤成功"
-                }
-              },
-              "xml": {
-                "name": "main"
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "api_key": [
-              "apiKeyAuth"
-            ]
-          }
-        ]
-      }
-    },
-    "/api/food/{foodId}/unlike": {
-      "post": {
-        "tags": [
-          "Food - 食品"
-        ],
-        "description": "取消食品書籤 API",
-        "parameters": [
-          {
-            "name": "foodId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "食品書籤資訊",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "status": {
-                  "type": "boolean",
-                  "example": true
-                },
-                "message": {
-                  "type": "string",
-                  "example": "取消食品書籤成功"
                 }
               },
               "xml": {
@@ -725,11 +637,11 @@
                 },
                 "perUnitWeight": {
                   "type": "string",
-                  "example": "食品重含量"
+                  "example": "食品每一份量含"
                 },
                 "unit": {
                   "type": "string",
-                  "example": "食品重含量單位"
+                  "example": "食品每一份量含單位"
                 },
                 "nutrition": {
                   "type": "object",
@@ -852,11 +764,11 @@
                 },
                 "perUnitWeight": {
                   "type": "string",
-                  "example": "食品重含量"
+                  "example": "食品每一份量含"
                 },
                 "unit": {
                   "type": "string",
-                  "example": "食品重含量單位"
+                  "example": "食品每一份量含單位"
                 },
                 "nutrition": {
                   "type": "object",
@@ -1146,6 +1058,143 @@
                 "message": {
                   "type": "string",
                   "example": "刪除一筆營養日記成功"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/likes": {
+      "get": {
+        "tags": [
+          "Like - 書籤"
+        ],
+        "description": "取得食品書籤列表 API",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "食品書籤資訊",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "取得食品書籤列表成功"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/like/{foodId}": {
+      "get": {
+        "description": "",
+        "parameters": [
+          {
+            "name": "foodId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {}
+      },
+      "post": {
+        "tags": [
+          "Like - 書籤"
+        ],
+        "description": "新增食品書籤 API",
+        "parameters": [
+          {
+            "name": "foodId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "食品書籤資訊",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "新增食品書籤成功"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "api_key": [
+              "apiKeyAuth"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/unlike/{foodId}": {
+      "post": {
+        "tags": [
+          "Like - 書籤"
+        ],
+        "description": "取消食品書籤 API",
+        "parameters": [
+          {
+            "name": "foodId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "食品書籤資訊",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "取消食品書籤成功"
                 }
               },
               "xml": {
