@@ -128,7 +128,7 @@ exports.createOneDiary = catchAsync(async(req, res, next) => {
 
 // 編輯一筆營養日記 API
 exports.updateOneDiary = catchAsync(async(req, res, next) => {
-  const { quantity, meal } = req.body;
+  const { quantity, meal, dateTime } = req.body;
   const diaryId = req.params.diaryId;
   const userId = req.userId;
   // 資料欄位正確
@@ -143,7 +143,7 @@ exports.updateOneDiary = catchAsync(async(req, res, next) => {
   const data = await Diary.findOneAndUpdate({
     _id: diaryId,
     user: userId
-  }, { meal, quantity }, {new: true, runValidators: true}).exec();
+  }, { meal, quantity, createdAt: new Date(dateTime) }, {new: true, runValidators: true}).exec();
   if (!data) return appError(apiState.DATA_NOT_FOUND, next);
 
   appSuccess({ res, message: '編輯一筆營養日記成功'});
